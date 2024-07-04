@@ -1,5 +1,4 @@
-open Osdl2
 
 let () =
-  Sdl.init [`VIDEO];
-  Sdl.quit ()
+  Osdl2.init [`VIDEO];
+  Osdl2.quit ()
