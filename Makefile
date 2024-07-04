@@ -1,4 +1,4 @@
-.PHONY: build test t clean
+.PHONY: build test t clean install
 
 
 build:
@@ -11,3 +11,5 @@ t: test
 test:
 	dune runtest -f
 
+install: build
+	opam install -v --working-dir ./osdl.opam

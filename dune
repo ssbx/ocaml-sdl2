@@ -22,6 +22,19 @@
  (public_name osdl)
  (name osdl)
  (modes native)
+ (install_c_headers
+   stubs/sdlaudio
+   stubs/sdlblendMode
+   stubs/sdlkeymod
+   stubs/sdlpixelFormat
+   stubs/sdlpixel
+   stubs/sdlpoint
+   stubs/sdlrect
+   stubs/sdlrenderer
+   stubs/sdlrwops
+   stubs/sdlsurface
+   stubs/sdltexture
+   stubs/sdlwindow)
  (foreign_stubs
   (language c)
   ; cstubs/ directory, works because (include_subdirs unqualified)
@@ -57,4 +70,3 @@
     )
   (flags :standard (:include c_flags_sdl2.sexp)))
  (c_library_flags (:include c_library_sdl2.sexp)))
-
