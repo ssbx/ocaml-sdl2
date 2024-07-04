@@ -15,13 +15,13 @@
 #include <caml/fail.h>
 
 #include <SDL_render.h>
-#include "sdlrenderer.h"
-#include "sdlwindow.h"
-#include "sdltexture.h"
-#include "sdlsurface.h"
-#include "sdlrect.h"
-#include "sdlpoint.h"
-#include "sdlblendMode.h"
+#include "renderer_stub.h"
+#include "window_stub.h"
+#include "texture_stub.h"
+#include "surface_stub.h"
+#include "rect_stub.h"
+#include "point_stub.h"
+#include "blendMode_stub.h"
 
 #define Val_none Val_int(0)
 /*

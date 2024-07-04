@@ -16,7 +16,7 @@
 #include <caml/bigarray.h>
 
 #include <SDL_surface.h>
-#include "sdlsurface.h"
+#include "surface_stub.h"
 
 CAMLprim value
 caml_SDL_Surface_ba_get_pixels(value surface)

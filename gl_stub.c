@@ -15,7 +15,7 @@
 #include <caml/fail.h>
 
 #include <SDL_video.h>
-#include "sdlwindow.h"
+#include "window_stub.h"
 
 /* TODO
 int SDL_GL_LoadLibrary(const char *path);

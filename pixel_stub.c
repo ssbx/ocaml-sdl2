@@ -16,7 +16,7 @@
 
 #include <SDL.h>
 #include <SDL_pixels.h>
-#include "sdlpixelFormat.h"
+#include "pixelFormat_stub.h"
 
 CAMLprim value
 caml_SDL_GetPixelFormatName(value format)

@@ -15,8 +15,8 @@
 #include <caml/fail.h>
 
 #include <SDL_rect.h>
-#include "sdlrect.h"
-#include "sdlpoint.h"
+#include "rect_stub.h"
+#include "point_stub.h"
 
 #define Val_none Val_int(0)
 

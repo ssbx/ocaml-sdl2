@@ -18,7 +18,7 @@
 #include <SDL_keyboard.h>
 #include <SDL_keycode.h>
 #include <SDL_scancode.h>
-#include "sdlkeymod.h"
+#include "keymod_stub.h"
 
 #define Val_none Val_int(0)
 

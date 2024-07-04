@@ -15,9 +15,9 @@
 #include <caml/fail.h>
 
 #include <SDL_video.h>
-#include "sdlwindow.h"
-#include "sdlsurface.h"
-#include "sdlrect.h"
+#include "window_stub.h"
+#include "surface_stub.h"
+#include "rect_stub.h"
 
 /*
 typedef struct
