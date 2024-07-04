@@ -8,6 +8,7 @@ module Sdl = struct
 
   module Rect = Rect
   module PixelFormat = PixelFormat
+  module TextureAccess = TextureAccess
   module Keymod = Keymod
   module Keycode = Keycode
   module Scancode = Scancode

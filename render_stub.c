@@ -575,27 +575,21 @@ caml_SDL_SetRenderTarget(
     return Val_unit;
 }
 
-/*
 CAMLprim value
-caml_SDL_SetRenderDrawColor(
-        value renderer,
-        value rgba)
+caml_SDL_GetRendererOutputSize(value renderer)
 {
-    value r = Field(rgba,0);
-    value g = Field(rgba,1);
-    value b = Field(rgba,2);
-    value a = Field(rgba,3);
-    int r = SDL_SetRenderDrawColor(
-                SDL_Renderer_val(renderer),
-                Uint8_val(r), Uint8_val(g),
-                Uint8_val(b), Uint8_val(a));
+    CAMLparam1(renderer);
+    CAMLlocal1(ret);
 
-    if (r) caml_failwith("Sdlrender.set_render_draw_color");
+    int w, h;
+    int r = SDL_GetRendererOutputSize(SDL_Renderer_val(renderer), &w, &h);
+    if (r) caml_failwith("Sdlrender.get_output_size");
 
-    return Val_unit;
+    ret = caml_alloc(2, 0);
+    Store_field(ret, 0, Val_int(w));
+    Store_field(ret, 1, Val_int(h));
+    CAMLreturn(ret);
 }
-*/
-
 
 
 /* vim: set ts=4 sw=4 et: */

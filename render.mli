@@ -177,3 +177,6 @@ external create_texture : t -> PixelFormat.t -> TextureAccess.t -> int -> int ->
 
 external set_target : t -> Texture.t option -> unit
   = "caml_SDL_SetRenderTarget"
+
+external get_output_size : t -> int * int
+  = "caml_SDL_GetRendererOutputSize"
