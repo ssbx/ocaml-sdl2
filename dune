@@ -19,8 +19,8 @@
    ;(system "echo -n '( -I'; ocamlc -where; echo -n ')'"))))
 
 (library
- (public_name osdl)
- (name osdl)
+ (public_name osdl2)
+ (name osdl2)
  (modes native)
  (install_c_headers
    stubs/sdlaudio

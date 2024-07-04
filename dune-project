@@ -1,12 +1,12 @@
 (lang dune 3.15)
 
-(name osdl)
-(version 2.0)
+(name osdl2)
+(version 1.0)
 
 (generate_opam_files true)
 
 (source
- (github ssbx/osdl))
+ (github ssbx/osdl2))
 
 (authors "Seb")
 
@@ -14,12 +14,12 @@
 
 (license "BSD Zero Clause License")
 
-(documentation https://github.com/ssbx/osdl)
+(documentation https://github.com/ssbx/osdl2)
 
 (use_standard_c_and_cxx_flags true)
 
 (package
- (name osdl)
+ (name osdl2)
  (synopsis "Bindings to the SDL2 library")
  (description "Bindings to the SDL2 library")
  (depends ocaml dune conf-sdl2)

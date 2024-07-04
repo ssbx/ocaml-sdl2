@@ -1,5 +1,6 @@
 
-module SDL2 = struct
+module Sdl = struct
+
   include Init
   include Quit
 
@@ -22,7 +23,7 @@ module SDL2 = struct
   module Version = Version
   module Texture = Texture
   module Renderer = Renderer
-  module Rwops = Rwops
+  module RWops = Rwops
   module Power = Power
   module Mouse = Mouse
   module Keyboard = Keyboard
@@ -32,4 +33,5 @@ module SDL2 = struct
   module Filesystem = Filesystem
   module Joystick = Joystick
   module GL = Gl
+
 end
