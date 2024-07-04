@@ -15,7 +15,7 @@
 #include <caml/fail.h>
 
 #include <SDL_render.h>
-#include "renderer_stub.h"
+#include "render_stub.h"
 #include "texture_stub.h"
 #include "surface_stub.h"
 #include "blendMode_stub.h"

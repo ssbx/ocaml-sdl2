@@ -21,10 +21,11 @@
    blendMode_stub
    keymod_stub
    pixelFormat_stub
+   textureAccess_stub
    pixel_stub
    point_stub
    rect_stub
-   renderer_stub
+   render_stub
    rwops_stub
    surface_stub
    texture_stub
@@ -35,6 +36,7 @@
     video_stub
     rect_stub
     pixelFormat_stub
+    textureAccess_stub
     pixel_stub
     keymod_stub
     error_stub
@@ -48,7 +50,7 @@
     event_stub
     version_stub
     texture_stub
-    renderer_stub
+    render_stub
     rwops_stub
     power_stub
     mouse_stub

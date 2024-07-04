@@ -15,13 +15,15 @@
 #include <caml/fail.h>
 
 #include <SDL_render.h>
-#include "renderer_stub.h"
+#include "render_stub.h"
 #include "window_stub.h"
 #include "texture_stub.h"
 #include "surface_stub.h"
 #include "rect_stub.h"
 #include "point_stub.h"
 #include "blendMode_stub.h"
+#include "pixelFormat_stub.h"
+#include "textureAccess_stub.h"
 
 #define Val_none Val_int(0)
 /*
@@ -536,20 +538,64 @@ caml_SDL_RenderReadPixels(value renderer, value _rect, value surf)
     return Val_unit;
 }
 
+CAMLprim value
+caml_SDL_CreateTexture(value renderer, value format, value access, value w, value h) {
+
+    SDL_Texture *texture =
+        SDL_CreateTexture(
+                SDL_Renderer_val(renderer),
+                Sdl_pixelformat_t(format),
+                Sdl_textureaccess_t(access),
+                Int_val(w),
+                Int_val(h));
+
+    if (!texture) caml_failwith("Sdlrender.create_texture");
+
+    return Val_SDL_Texture(texture);
+}
 
 CAMLprim value
 caml_SDL_SetRenderTarget(
         value renderer,
-        value texture)
+        value texture_option)
 {
+
+    SDL_Texture *texture;
+    if (Is_none(texture_option)) {
+        texture = NULL;
+    } else {
+        texture = SDL_Texture_val(Some_val(texture_option));
+    }
     int r = SDL_SetRenderTarget(
                 SDL_Renderer_val(renderer),
-                SDL_Texture_val(texture));
+                texture);
 
-    if (r) caml_failwith("Sdlrender.copy");
+    if (r) caml_failwith("Sdlrender.render_target");
 
     return Val_unit;
 }
+
+/*
+CAMLprim value
+caml_SDL_SetRenderDrawColor(
+        value renderer,
+        value rgba)
+{
+    value r = Field(rgba,0);
+    value g = Field(rgba,1);
+    value b = Field(rgba,2);
+    value a = Field(rgba,3);
+    int r = SDL_SetRenderDrawColor(
+                SDL_Renderer_val(renderer),
+                Uint8_val(r), Uint8_val(g),
+                Uint8_val(b), Uint8_val(a));
+
+    if (r) caml_failwith("Sdlrender.set_render_draw_color");
+
+    return Val_unit;
+}
+*/
+
 
 
 /* vim: set ts=4 sw=4 et: */

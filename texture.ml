@@ -13,7 +13,7 @@
 type t
 
 external create_from_surface :
-  Renderer_type.renderer -> Surface.t -> t
+  Render_type.renderer -> Surface.t -> t
   = "caml_SDL_CreateTextureFromSurface"
 
 external destroy : t -> unit

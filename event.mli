@@ -79,8 +79,8 @@ type joy_hat_event = {
   jh_timestamp: int32;
   jh_which: int;
   jh_hat: int;
-  jh_dir: Hat.direction;
-  jh_pos: Hat.positions;
+  jh_dir: Haptic.direction;
+  jh_pos: Haptic.positions;
 }
 (** {{:http://wiki.libsdl.org/SDL_JoyHatEvent}api doc} *)
 
