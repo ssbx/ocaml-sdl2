@@ -16,9 +16,6 @@ external create_from_surface :
   Render_type.renderer -> Surface.t -> t
   = "caml_SDL_CreateTextureFromSurface"
 
-external destroy : t -> unit
-  = "caml_SDL_DestroyTexture"
-
 external set_blend_mode : t -> BlendMode.t -> unit
   = "caml_SDL_SetTextureBlendMode" [@@noalloc]
 

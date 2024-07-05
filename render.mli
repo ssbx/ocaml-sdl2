@@ -175,6 +175,8 @@ external read_pixels : t -> ?rect:Rect.t -> Surface.t -> unit
 external create_texture : t -> PixelFormat.t -> TextureAccess.t -> int -> int -> Texture.t
   = "caml_SDL_CreateTexture"
 
+external destroy_texture : Texture.t -> unit = "caml_SDL_DestroyTexture"
+
 external set_target : t -> Texture.t option -> unit
   = "caml_SDL_SetRenderTarget"
 

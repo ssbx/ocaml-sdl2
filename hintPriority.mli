@@ -8,22 +8,9 @@
  Permission is granted to anyone to use this software for any purpose,
  including commercial applications, and to alter it and redistribute it freely.
 *)
-(** Initialisation *)
 
-type subsystem = [
-  | `TIMER
-  | `AUDIO
-  | `VIDEO
-  | `JOYSTICK
-  | `HAPTIC
-  | `GAMECONTROLLER
-  | `EVENTS
-  | `EVERYTHING
-  | `NOPARACHUTE
-  ]
+(** {{:http://wiki.libsdl.org/SDL_HintPriority}api doc} *)
+type t = Default | Normal | Override
+val to_string : t -> string
+val of_string : string -> t
 
-external init : subsystem list -> unit = "caml_SDL_Init"
-  (*[< subsystem | `EVERYTHING | `NOPARACHUTE ] list -> unit*)
-
-
-external init_subsystem : subsystem list -> unit = "caml_SDL_InitSubSystem"

@@ -22,6 +22,7 @@
    keymod_stub
    pixelFormat_stub
    textureAccess_stub
+   hintPriority_stub
    pixel_stub
    point_stub
    rect_stub
@@ -38,6 +39,8 @@
     pixelFormat_stub
     textureAccess_stub
     pixel_stub
+    hints_stub
+    hintPriority_stub
     keymod_stub
     error_stub
     blendMode_stub

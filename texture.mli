@@ -19,10 +19,6 @@ external create_from_surface :
   = "caml_SDL_CreateTextureFromSurface"
 (** {{:http://wiki.libsdl.org/SDL_CreateTextureFromSurface}api doc} *)
 
-external destroy : t -> unit
-  = "caml_SDL_DestroyTexture"
-(** {{:http://wiki.libsdl.org/SDL_DestroyTexture}api doc} *)
-
 external set_blend_mode : t -> BlendMode.t -> unit
   = "caml_SDL_SetTextureBlendMode" [@@noalloc]
 (** {{:http://wiki.libsdl.org/SDL_SetTextureBlendMode}api doc} *)

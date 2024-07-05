@@ -32,4 +32,6 @@ module CPUinfo = Cpuinfo
 module Filesystem = Filesystem
 module Joystick = Joystick
 module GL = Gl
+module Hints = Hints
+module HintPriority = HintPriority
 
