@@ -20,38 +20,43 @@
 CAMLprim value
 caml_SDL_StartTextInput(value unit)
 {
+    CAMLparam0();
     SDL_StartTextInput();
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_StopTextInput(value unit)
 {
+    CAMLparam0();
     SDL_StopTextInput();
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_IsTextInputActive(value unit)
 {
+    CAMLparam0();
     SDL_bool b = SDL_IsTextInputActive();
-    return Val_bool(b);
+    CAMLreturn(Val_bool(b));
 }
 
 CAMLprim value
 caml_SDL_SetTextInputRect(value _rect)
 {
+    CAMLparam1(_rect);
     SDL_Rect rect;
     SDL_Rect_val(&rect, _rect);
     SDL_SetTextInputRect(&rect);
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_HasScreenKeyboardSupport(value unit)
 {
+    CAMLparam0();
     SDL_bool b = SDL_HasScreenKeyboardSupport();
-    return Val_bool(b);
+    CAMLreturn(Val_bool(b));
 }
 
 /* vim: set ts=4 sw=4 et: */

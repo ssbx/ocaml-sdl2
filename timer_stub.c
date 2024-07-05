@@ -19,8 +19,9 @@
 CAMLprim value
 caml_SDL_GetTicks(value unit)
 {
+    CAMLparam0();
     Uint32 ticks = SDL_GetTicks();
-    return Val_long(ticks);
+    CAMLreturn(Val_long(ticks));
 }
 
 CAMLprim value
@@ -41,8 +42,9 @@ caml_SDL_GetTicks_d(value unit)
 CAMLprim value
 caml_SDL_Delay(value ms)
 {
-  SDL_Delay(Long_val(ms));
-  return Val_unit;
+    CAMLparam1(ms);
+    SDL_Delay(Long_val(ms));
+    CAMLreturn(Val_unit);
 }
 
 /* vim: set ts=4 sw=4 et: */

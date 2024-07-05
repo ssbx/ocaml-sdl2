@@ -1,10 +1,10 @@
 /* OCamlSDL2 - An OCaml interface to the SDL2 library
  Copyright (C) 2013 Florent Monnier
- 
+
  This software is provided "AS-IS", without any express or implied warranty.
  In no event will the authors be held liable for any damages arising from
  the use of this software.
- 
+
  Permission is granted to anyone to use this software for any purpose,
  including commercial applications, and to alter it and redistribute it freely.
 */
@@ -39,7 +39,7 @@ sdlinit_val(value v)
 static inline Uint32
 Sdl_init_val(value mask_list)
 {
-    Uint32 c_mask = 0; 
+    Uint32 c_mask = 0;
     while (mask_list != Val_emptylist)
     {
         value head = Field(mask_list, 0);
