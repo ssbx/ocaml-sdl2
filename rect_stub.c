@@ -18,21 +18,10 @@
 #include "rect_stub.h"
 #include "point_stub.h"
 
-#define Val_none Val_int(0)
-
-static value
-Val_some(value v)
-{
-    CAMLparam1(v);
-    CAMLlocal1(some);
-    some = caml_alloc(1, 0);
-    Store_field(some, 0, v);
-    CAMLreturn(some);
-}
-
 CAMLprim value
 caml_SDL_HasIntersection(value a, value b)
 {
+    CAMLparam2(a,b);
     SDL_Rect _a;
     SDL_Rect _b;
     SDL_Rect_val(&_a, a);
@@ -41,12 +30,13 @@ caml_SDL_HasIntersection(value a, value b)
     SDL_bool r =
         SDL_HasIntersection(&_a, &_b);
 
-    return Val_bool(r);
+    CAMLreturn(Val_bool(r));
 }
 
 CAMLprim value
 caml_SDL_PointInRect(value pt, value rct)
 {
+    CAMLparam2(pt, rct);
     SDL_Point _pt;
     SDL_Rect _rct;
     SDL_Rect_val(&_rct, rct);
@@ -55,7 +45,7 @@ caml_SDL_PointInRect(value pt, value rct)
     SDL_bool r =
         SDL_PointInRect(&_pt, &_rct);
 
-    return Val_bool(r);
+    CAMLreturn(Val_bool(r));
 }
 
 CAMLprim value
@@ -86,7 +76,7 @@ caml_SDL_IntersectRectAndLine(value rect, value p1, value p2)
         Store_field(r, 2, Val_int(X2));
         Store_field(r, 3, Val_int(Y2));
 
-        ret = Val_some(r);
+        ret = caml_alloc_some(r);
     } else {
         ret = Val_none;
     }

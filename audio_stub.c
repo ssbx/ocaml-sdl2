@@ -1,10 +1,10 @@
 /* OCamlSDL2 - An OCaml interface to the SDL2 library
  Copyright (C) 2013 Florent Monnier
- 
+
  This software is provided "AS-IS", without any express or implied warranty.
  In no event will the authors be held liable for any damages arising from
  the use of this software.
- 
+
  Permission is granted to anyone to use this software for any purpose,
  including commercial applications, and to alter it and redistribute it freely.
 */
@@ -67,7 +67,7 @@ Val_SDL_AudioFormat(SDL_AudioFormat format)
 CAMLprim value
 caml_SDL_GetAudioDrivers(value unit)
 {
-    CAMLparam0();
+    CAMLparam1(unit);
     CAMLlocal1(ret);
     int i, num;
     num = SDL_GetNumAudioDrivers();
@@ -82,33 +82,39 @@ caml_SDL_GetAudioDrivers(value unit)
 CAMLprim value
 caml_SDL_AudioInit(value driver_name)
 {
+    CAMLparam1(driver_name);
     int r = SDL_AudioInit(String_val(driver_name));
     if (r) caml_failwith("Sdlaudio.init");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_AudioQuit(value unit)
 {
+    CAMLparam1(unit);
     SDL_AudioQuit();
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_GetCurrentAudioDriver(value unit)
 {
+    CAMLparam1(unit);
+    CAMLlocal1(ret);
     const char * dr = SDL_GetCurrentAudioDriver();
-    return caml_copy_string(dr);
+    ret = caml_copy_string(dr);
+    CAMLreturn(ret);
 }
 
 static inline SDL_AudioStatus
 SDL_AudioStatus_val(value v)
 {
+    CAMLparam1(v);
     switch (Int_val(v))
     {
-        case 0: return SDL_AUDIO_STOPPED;
-        case 1: return SDL_AUDIO_PLAYING;
-        case 2: return SDL_AUDIO_PAUSED;
+        case 0: CAMLreturn(SDL_AUDIO_STOPPED);
+        case 1: CAMLreturn(SDL_AUDIO_PLAYING);
+        case 2: CAMLreturn(SDL_AUDIO_PAUSED);
         default: caml_failwith("Sdlaudio.status");
     }
     caml_failwith("Sdlaudio.status");
@@ -130,8 +136,9 @@ Val_SDL_AudioStatus(SDL_AudioStatus st)
 CAMLprim value
 caml_SDL_GetAudioStatus(value unit)
 {
+    CAMLparam1(unit);
     SDL_AudioStatus st = SDL_GetAudioStatus();
-    return Val_SDL_AudioStatus(st);
+    CAMLreturn(Val_SDL_AudioStatus(st));
 }
 
 CAMLprim value

@@ -20,17 +20,6 @@
 #include <SDL_scancode.h>
 #include "keymod_stub.h"
 
-#define Val_none Val_int(0)
-
-static value
-Val_some(value v)
-{
-    CAMLparam1(v);
-    CAMLlocal1(some);
-    some = caml_alloc(1, 0);
-    Store_field(some, 0, v);
-    CAMLreturn(some);
-}
 
 #if 0
     SDL_WindowEvent window;           /* Window */
@@ -1005,8 +994,15 @@ Val_SDL_Event(SDL_Event * event)
 CAMLprim value
 caml_SDL_PollEvent(value unit)
 {
+    CAMLparam1(unit);
+    CAMLlocal1(ret);
+
     SDL_Event event;
     int r = SDL_PollEvent(&event);
-    if (!r) return Val_none;
-    return Val_some(Val_SDL_Event(&event));
+    if (!r) {
+        ret = Val_none;
+    } else {
+        ret = caml_alloc_some(Val_SDL_Event(&event));
+    }
+    CAMLreturn(ret);
 }

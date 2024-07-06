@@ -48,17 +48,17 @@ CAMLprim value
 caml_SDL_GetHint(value hint)
 {
     CAMLparam1(hint);
-    CAMLlocal2(v,some);
+    CAMLlocal2(val,ret);
 
     const char *hint_val = SDL_GetHint(String_val(hint));
 
     if (hint_val) {
-        v = caml_copy_string(hint_val);
-        some = caml_alloc_some(v);
-        CAMLreturn(some);
+        val = caml_copy_string(hint_val);
+        ret = caml_alloc_some(val);
     } else {
-        CAMLreturn(Val_none);
+        ret = Val_none;
     }
+    CAMLreturn(ret);
 }
 
 

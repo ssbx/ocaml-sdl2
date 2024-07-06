@@ -25,11 +25,6 @@
 #include "pixelFormat_stub.h"
 #include "textureAccess_stub.h"
 
-#define Val_none Val_int(0)
-/*
-#define Some_val(v) Field(v,0)
-*/
-
 CAMLprim value
 caml_SDL_CreateWindowAndRenderer(
         value width, value height, value _window_flags)
