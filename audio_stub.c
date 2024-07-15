@@ -64,6 +64,9 @@ Val_SDL_AudioFormat(SDL_AudioFormat format)
     caml_failwith("SdlAudiFormat.t");
 }
 
+#define SDL_AudioFormat_val(format) \
+    ocaml_SDL_AudioFormat_table[Long_val(format)]
+
 CAMLprim value
 caml_SDL_GetAudioDrivers(value unit)
 {
@@ -342,6 +345,4 @@ int SDL_AudioDeviceConnected(SDL_AudioDeviceID dev);
 #endif
 
 /* vim: set ts=4 sw=4 et: */
-/* Local Variables: */
-/* c-basic-offset:4; tab-width:4; indent-tabs-mode:nil; */
-/* End: */
+

@@ -2,6 +2,8 @@
 (**
    {{https://wiki.libsdl.org/SDL2/CategoryVideo}CategoryVideo} *)
 
+open Surface
+
 module WindowEventID = struct
 
   type point = {
@@ -166,7 +168,7 @@ external minimize_window : Window.t -> unit = "caml_SDL_MinimizeWindow"
 external restore_window : Window.t -> unit = "caml_SDL_RestoreWindow"
 
 external get_window_surface :
-  Window.t -> Surface.surface_t
+  Window.t -> Surface.t
   = "caml_SDL_GetWindowSurface"
 
 external update_window_surface : Window.t -> unit

@@ -16,7 +16,6 @@
 
 #include <SDL_rect.h>
 #include "rect_stub.h"
-#include "point_stub.h"
 
 CAMLprim value
 caml_SDL_HasIntersection(value a, value b)
@@ -49,24 +48,21 @@ caml_SDL_PointInRect(value pt, value rct)
 }
 
 CAMLprim value
-caml_SDL_IntersectRectAndLine(value rect, value p1, value p2)
+caml_SDL_IntersectRectAndLine(value rect, value x1, value y1, value x2, value y2)
 {
-    CAMLparam3(rect, p1, p2);
+    CAMLparam5(rect, x1, y1, x2, y2);
     CAMLlocal2(ret, r);
 
     SDL_Rect _rect;
     SDL_Rect_val(&_rect, rect);
 
-    int X1 = Int_val(Field(p1, 0));
-    int Y1 = Int_val(Field(p1, 1));
-    int X2 = Int_val(Field(p2, 0));
-    int Y2 = Int_val(Field(p2, 1));
+    int X1 = Int_val(x1);
+    int Y1 = Int_val(y1);
+    int X2 = Int_val(x2);
+    int Y2 = Int_val(y2);
 
     SDL_bool res =
-        SDL_IntersectRectAndLine(
-                &_rect,
-                &X1, &Y1,
-                &X2, &Y2);
+        SDL_IntersectRectAndLine(&_rect, &X1, &Y1, &X2, &Y2);
 
     if (res == SDL_TRUE) {
         r = caml_alloc(4, 0);

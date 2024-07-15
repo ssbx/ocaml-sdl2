@@ -10,22 +10,95 @@
 *)
 (* Read / Write operations *)
 
-type rwops_t
 
-external rw_from_mem : bytes -> rwops_t
+module RWops = struct
+  type t
+
+  type uint8 = int
+  type uint16 = int
+  type uint32 = int32
+  type uint64 = int64
+
+  type input = [
+    | `Filename of string  (* provide the input by its filename *)
+    | `Buffer of bytes     (* provide the input data as a bytes buffer *)
+    | `String of string    (* provide the input data as a string buffer *)
+  ]
+
+  type seek =
+    | SEEK_SET
+    | SEEK_CUR
+    | SEEK_END
+end
+
+external rw_from_mem : bytes -> RWops.t
   = "caml_SDL_RWFromMem"
 
-external rw_from_const_mem : string -> rwops_t
+external rw_from_const_mem : string -> RWops.t
   = "caml_SDL_RWFromConstMem"
 
-external rw_from_file : filename:string -> mode:string -> rwops_t
+external rw_from_file : filename:string -> mode:string -> RWops.t
   = "caml_SDL_RWFromFile"
 
-type input = [
-  | `Filename of string  (* provide the input by its filename *)
-  | `Buffer of bytes     (* provide the input data as a bytes buffer *)
-  | `String of string    (* provide the input data as a string buffer *)
-  ]
+external alloc_rw : unit -> RWops.t
+  = "caml_SDL_AllocRW"
+
+external free_rw : RWops.t -> unit
+  = "caml_SDL_FreeRW"
+
+external close_rw : RWops.t -> unit
+  = "caml_SDL_CloseRW"
+
+external rw_size : RWops.t -> int64
+  = "caml_SDL_RWsize"
+
+external rw_seek : RWops.t -> offset:int64 -> RWops.seek -> int64
+  = "caml_SDL_RWseek"
+
+external rw_tell : RWops.t -> int64
+  = "caml_SDL_RWtell"
+
+external read_U8 : RWops.t -> RWops.uint8
+  = "caml_SDL_ReadU8"
+
+external write_U8 : RWops.t -> RWops.uint8 -> unit
+  = "caml_SDL_WriteU8"
+
+external read_be16 : RWops.t -> RWops.uint16
+  = "caml_SDL_ReadBE16"
+
+external read_be32 : RWops.t -> RWops.uint32
+  = "caml_SDL_ReadBE32"
+
+external read_be64 : RWops.t -> RWops.uint64
+  = "caml_SDL_ReadBE64"
+
+external write_be16 : RWops.t -> RWops.uint16 -> unit
+  = "caml_SDL_WriteBE16"
+
+external write_be32 : RWops.t -> RWops.uint32 -> unit
+  = "caml_SDL_WriteBE32"
+
+external write_be64 : RWops.t -> RWops.uint64 -> unit
+  = "caml_SDL_WriteBE64"
+
+external read_le16 : RWops.t -> RWops.uint16
+  = "caml_SDL_ReadLE16"
+
+external read_le32 : RWops.t -> RWops.uint32
+  = "caml_SDL_ReadLE32"
+
+external read_le64 : RWops.t -> RWops.uint64
+  = "caml_SDL_ReadLE64"
+
+external write_le16 : RWops.t -> RWops.uint16 -> unit
+  = "caml_SDL_WriteLE16"
+
+external write_le32 : RWops.t -> RWops.uint32 -> unit
+  = "caml_SDL_WriteLE32"
+
+external write_le64 : RWops.t -> RWops.uint64 -> unit
+  = "caml_SDL_WriteLE64"
 
 let from_input = function
   | `Filename(filename) -> rw_from_file ~filename ~mode:"r"
@@ -37,55 +110,4 @@ let from_input_opt = function
   | `Buffer(mem) -> Some(rw_from_mem mem)
   | `String(mem) -> Some(rw_from_const_mem mem)
   | _ -> None
-
-external alloc_rw : unit -> rwops_t = "caml_SDL_AllocRW"
-external free_rw : rwops_t -> unit = "caml_SDL_FreeRW"
-
-external close_rw : rwops_t -> unit = "caml_SDL_CloseRW"
-
-external rw_size : rwops_t -> int64 = "caml_SDL_RWsize"
-
-type seek =
-  | SEEK_SET
-  | SEEK_CUR
-  | SEEK_END
-
-external rw_seek : rwops_t -> offset:int64 -> seek -> int64
-  = "caml_SDL_RWseek"
-
-external rw_tell : rwops_t -> int64
-  = "caml_SDL_RWtell"
-
-type uint8 = int
-
-type uint16 = int
-type uint32 = int32
-type uint64 = int64
-
-external readU8 : rwops_t -> uint8 = "caml_SDL_ReadU8"
-external writeU8 : rwops_t -> uint8 -> unit = "caml_SDL_WriteU8"
-
-module BigEndian = struct
-
-  external read16 : rwops_t -> uint16 = "caml_SDL_ReadBE16"
-  external read32 : rwops_t -> uint32 = "caml_SDL_ReadBE32"
-  external read64 : rwops_t -> uint64 = "caml_SDL_ReadBE64"
-
-  external write16 : rwops_t -> uint16 -> unit = "caml_SDL_WriteBE16"
-  external write32 : rwops_t -> uint32 -> unit = "caml_SDL_WriteBE32"
-  external write64 : rwops_t -> uint64 -> unit = "caml_SDL_WriteBE64"
-
-end
-
-module LittleEndian = struct
-
-  external read16 : rwops_t -> uint16 = "caml_SDL_ReadLE16"
-  external read32 : rwops_t -> uint32 = "caml_SDL_ReadLE32"
-  external read64 : rwops_t -> uint64 = "caml_SDL_ReadLE64"
-
-  external write16 : rwops_t -> uint16 -> unit = "caml_SDL_WriteLE16"
-  external write32 : rwops_t -> uint32 -> unit = "caml_SDL_WriteLE32"
-  external write64 : rwops_t -> uint64 -> unit = "caml_SDL_WriteLE64"
-
-end
 

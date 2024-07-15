@@ -14,38 +14,29 @@
 
 (library
  (public_name osdl2)
- (name osdl2)
+ (name sdl)
  (modes native)
  (install_c_headers
-   audio_stub
    blendmode_stub
    keycode_stub
    pixel_stub
-   textureAccess_stub
-   point_stub
    rect_stub
-   render_stub
-   rwops_stub
    surface_stub
-   texture_stub
    video_stub)
  (foreign_stubs
   (language c)
   (names
     rect_stub
-    textureAccess_stub
     pixel_stub
     hints_stub
     keycode_stub
     error_stub
     blendmode_stub
     surface_stub
-    surface_ba_stub
     init_stub
     timer_stub
     events_stub
     version_stub
-    texture_stub
     render_stub
     rwops_stub
     power_stub

@@ -1,151 +1,218 @@
 open Blendmode
 open Pixel
 open Video
-type renderer_t = Render_type.renderer_t
+open Rect
+open Surface
+
+module Renderer = struct type t end
+
+module RendererInfo = struct
+  type t = {
+    name: string;
+    max_texture_width: int;
+    max_texture_height: int;
+  }
+end
+
+module RendererFlags = struct
+  type t =
+    | Software
+    | Accelerated
+    | PresentVSync
+    | TargetTexture
+
+  let to_string = function
+    | Software        -> "Software"
+    | Accelerated     -> "Accelerated"
+    | PresentVSync    -> "PresentVSync"
+    | TargetTexture   -> "TargetTexture"
+
+  let of_string s =
+    match String.lowercase_ascii s with
+    | "software"      -> Software
+    | "accelerated"   -> Accelerated
+    | "presentvsync"  -> PresentVSync
+    | "targettexture" -> TargetTexture
+    | _ -> invalid_arg "Sdl.RendererFlags.of_string"
+end
+
+module RendererFlip = struct
+  type t =
+    | Flip_None
+    | Flip_Horizontal
+    | Flip_Vertical
+end
+
+module TextureAccess = struct
+  type t = Static | Streaming | Target
+
+  let to_string = function
+    | Static    -> "SDL_TEXTUREACCESS_STATIC"
+    | Streaming -> "SDL_TEXTUREACCESS_STREAMING"
+    | Target    -> "SDL_TEXTUREACCESS_TARGET"
+
+  let of_string s =
+    match String.uppercase_ascii s with
+    | "SDL_TEXTUREACCESS_STATIC"    -> Static
+    | "SDL_TEXTUREACCESS_STREAMING" -> Streaming
+    | "SDL_TEXTUREACCESS_TARGET"    -> Target
+    | _ -> invalid_arg "SdltextureAccess.of_string"
+end
+
+module Texture = struct type t end
 
 external create_window_and_renderer :
   width:int -> height:int ->
   flags:WindowFlags.t list ->
-  Window.t * renderer_t
+  Window.t * Renderer.t
   = "caml_SDL_CreateWindowAndRenderer"
-
-type renderer_flags_t =
-  | Software
-  | Accelerated
-  | PresentVSync
-  | TargetTexture
-
-let string_of_renderer_flags = function
-  | Software        -> "Software"
-  | Accelerated     -> "Accelerated"
-  | PresentVSync    -> "PresentVSync"
-  | TargetTexture   -> "TargetTexture"
-
-let renderer_flags_of_string s =
-  match String.lowercase_ascii s with
-  | "software"      -> Software
-  | "accelerated"   -> Accelerated
-  | "presentvsync"  -> PresentVSync
-  | "targettexture" -> TargetTexture
-  | _ -> invalid_arg "Render.renderer_flags_of_string"
 
 external create_renderer :
   win:Window.t -> index:int ->
-  flags:renderer_flags_t list -> renderer_t
+  flags:RendererFlags.t list -> Renderer.t
   = "caml_SDL_CreateRenderer"
 
-external render_set_logical_size : renderer_t -> int * int -> unit
+external render_set_logical_size : Renderer.t -> int * int -> unit
   = "caml_SDL_RenderSetLogicalSize"
 
-external render_set_logical_size2 : renderer_t -> width:int -> height:int -> unit
+external render_set_logical_size2 : Renderer.t -> width:int -> height:int -> unit
   = "caml_SDL_RenderSetLogicalSize2"
 
 external render_set_viewport :
-  renderer_t -> Rect.rect_t -> unit
+  Renderer.t -> Rect.t -> unit
   = "caml_SDL_RenderSetViewport"
 
 external render_set_clip_rect :
-  renderer_t -> Rect.rect_t -> unit
+  Renderer.t -> Rect.t -> unit
   = "caml_SDL_RenderSetClipRect"
 
 external set_render_draw_color :
-  renderer_t -> rgb:(int * int * int) -> a:int -> unit
+  Renderer.t -> rgb:(int * int * int) -> a:int -> unit
   = "caml_SDL_SetRenderDrawColor"
 
 external set_render_draw_color3 :
-  renderer_t -> r:int -> g:int -> b:int -> a:int -> unit
+  Renderer.t -> r:int -> g:int -> b:int -> a:int -> unit
   = "caml_SDL_SetRenderDrawColor3"
 
-external set_render_draw_blend_mode : renderer_t -> BlendMode.t -> unit
+external set_render_draw_blend_mode : Renderer.t -> BlendMode.t -> unit
   = "caml_SDL_SetRenderDrawBlendMode"
 
 external render_draw_point :
-  renderer_t -> int * int -> unit
+  Renderer.t -> int * int -> unit
   = "caml_SDL_RenderDrawPoint"
 
 external render_draw_point2 :
-  renderer_t -> x:int -> y:int -> unit
+  Renderer.t -> x:int -> y:int -> unit
   = "caml_SDL_RenderDrawPoint2"
 
 external render_draw_points :
-  renderer_t -> points:(int * int) array -> unit
+  Renderer.t -> points:(int * int) array -> unit
   = "caml_SDL_RenderDrawPoints"
 
 external render_draw_line :
-  renderer_t -> ((int * int) * (int * int)) -> unit
+  Renderer.t -> ((int * int) * (int * int)) -> unit
   = "caml_SDL_RenderDrawLine"
 
 external render_draw_line2 :
-  renderer_t -> p1:(int * int) -> p2:(int * int) -> unit
+  Renderer.t -> p1:(int * int) -> p2:(int * int) -> unit
   = "caml_SDL_RenderDrawLine2"
 
 external render_draw_lines :
-  renderer_t -> (int * int) array -> unit
+  Renderer.t -> (int * int) array -> unit
   = "caml_SDL_RenderDrawLines"
 
 external render_draw_rect :
-  renderer_t -> Rect.rect_t -> unit
+  Renderer.t -> Rect.t -> unit
   = "caml_SDL_RenderDrawRect"
 
 external render_draw_rects :
-  renderer_t -> Rect.rect_t array -> unit
+  Renderer.t -> Rect.t array -> unit
   = "caml_SDL_RenderDrawRects"
 
 external render_fill_rect :
-  renderer_t -> Rect.rect_t -> unit
+  Renderer.t -> Rect.t -> unit
   = "caml_SDL_RenderFillRect"
 
 external render_fill_rects :
-  renderer_t -> Rect.rect_t array -> unit
+  Renderer.t -> Rect.t array -> unit
   = "caml_SDL_RenderFillRects"
 
-external render_copy : renderer_t ->
-  texture:Texture.texture_t ->
-  ?src_rect:Rect.rect_t ->
-  ?dst_rect:Rect.rect_t -> unit -> unit
+external render_copy : Renderer.t ->
+  texture:Texture.t ->
+  ?src_rect:Rect.t ->
+  ?dst_rect:Rect.t -> unit -> unit
   = "caml_SDL_RenderCopy"
 
-type renderer_flip_t =
-  | Flip_None
-  | Flip_Horizontal
-  | Flip_Vertical
-
-external render_copyEx : renderer_t ->
-  texture:Texture.texture_t ->
-  ?src_rect:Rect.rect_t ->
-  ?dst_rect:Rect.rect_t ->
+external render_copyEx : Renderer.t ->
+  texture:Texture.t ->
+  ?src_rect:Rect.t ->
+  ?dst_rect:Rect.t ->
   ?angle:float ->
   ?center:int * int ->
-  ?flip:renderer_flip_t ->
+  ?flip:RendererFlip.t ->
   unit -> unit
   = "caml_SDL_RenderCopyEx_bc"
     "caml_SDL_RenderCopyEx"
 
-external render_set_scale : renderer_t -> float * float -> unit
+external render_set_scale : Renderer.t -> float * float -> unit
   = "caml_SDL_RenderSetScale"
 
-external render_present : renderer_t -> unit
+external render_present : Renderer.t -> unit
   = "caml_SDL_RenderPresent"
 
-external render_clear : renderer_t -> unit
+external render_clear : Renderer.t -> unit
   = "caml_SDL_RenderClear"
 
-type renderer_info = {
-  name: string;
-  max_texture_width: int;
-  max_texture_height: int;
-}
+external get_num_render_drivers : unit -> int
+  = "caml_SDL_GetNumRenderDrivers"
 
-external get_render_drivers : unit -> renderer_info array
-  = "caml_SDL_GetRenderDrivers"
+external get_render_driver_info : int -> RendererInfo.t
+  = "caml_SDL_GetRenderDriverInfo"
 
-external render_read_pixels : renderer_t -> ?rect:Rect.rect_t -> Surface.surface_t -> unit
+external render_read_pixels : Renderer.t -> ?rect:Rect.t -> Surface.t -> unit
   = "caml_SDL_RenderReadPixels"
 
-external render_create_texture : renderer_t -> PixelFormat.t -> TextureAccess.texture_access_t -> int -> int -> Texture.texture_t = "caml_SDL_CreateTexture"
+external render_create_texture :
+    Renderer.t ->
+    PixelFormat.t ->
+    TextureAccess.t ->
+    int -> int ->
+    Texture.t
+  = "caml_SDL_CreateTexture"
 
-external destroy_texture : Texture.texture_t -> unit = "caml_SDL_DestroyTexture"
+external destroy_texture : Texture.t -> unit
+  = "caml_SDL_DestroyTexture"
 
-external set_renderer_target : renderer_t -> Texture.texture_t option -> unit = "caml_SDL_SetRenderTarget"
-external get_renderer_output_size : renderer_t -> int * int = "caml_SDL_GetRendererOutputSize"
+external set_renderer_target :
+    Renderer.t ->
+    Texture.t option -> unit
+  = "caml_SDL_SetRenderTarget"
+
+external get_renderer_output_size : Renderer.t -> int * int
+  = "caml_SDL_GetRendererOutputSize"
+
+external create_texture_from_surface :
+  Renderer.t -> Surface.t -> Texture.t
+  = "caml_SDL_CreateTextureFromSurface"
+
+external set_texture_blend_mode : Texture.t -> BlendMode.t -> unit
+  = "caml_SDL_SetTextureBlendMode" [@@noalloc]
+
+external get_texture_blend_mode : Texture.t -> BlendMode.t
+  = "caml_SDL_GetTextureBlendMode"
+
+external set_texture_alpha_mod : Texture.t -> alpha:int -> unit
+  = "caml_SDL_SetTextureAlphaMod"
+
+external get_texture_alpha_mod : Texture.t -> int
+  = "caml_SDL_GetTextureAlphaMod"
+
+external set_texture_color_mod : Texture.t -> int * int * int -> unit
+  = "caml_SDL_SetTextureColorMod"
+
+external set_texture_color_mod3 : Texture.t -> r:int -> g:int -> b:int -> unit
+  = "caml_SDL_SetTextureColorMod3"
+
+external get_texture_color_mod : Texture.t -> int * int * int
+  = "caml_SDL_GetTextureColorMod"
 

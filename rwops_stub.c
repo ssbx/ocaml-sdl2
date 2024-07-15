@@ -16,7 +16,16 @@
 #include <caml/version.h>
 
 #include <SDL_rwops.h>
-#include "rwops_stub.h"
+
+static value Val_SDL_RWops(SDL_RWops * p)
+{
+    return caml_copy_nativeint((intnat) p);
+}
+
+static SDL_RWops * SDL_RWops_val(value v)
+{
+    return (SDL_RWops *) Nativeint_val(v);
+}
 
 #if OCAML_VERSION < 40600
 #define Bytes_val(x) String_val(x)
@@ -170,3 +179,5 @@ write_int_stub(Uint64, SDL_WriteLE64, "LittleEndian.write64")
 write_int_stub(Uint64, SDL_WriteBE64, "BigEndian.write64")
 
 /* vim: set ts=4 sw=4 et: */
+
+

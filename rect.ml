@@ -11,33 +11,40 @@
 (** Rectangles *)
 
 (** A rectangle, with the origin at the upper left. *)
-type rect_t = {
-  x: int;
-  y: int;
-  w: int;
-  h: int;
-}
+module Rect = struct
+  type t = {
+    x: int;
+    y: int;
+    w: int;
+    h: int;
+  }
 
-let make1 (x, y, w, h) =
-  { x; y; w; h }
+  let make1 (x, y, w, h) =
+    { x; y; w; h }
 
-let make2 ~pos:(x, y) ~dims:(w, h) =
-  { x; y; w; h }
+  let make2 ~pos:(x, y) ~dims:(w, h) =
+    { x; y; w; h }
 
-let make4 ~x ~y ~w ~h =
-  { x; y; w; h }
+  let make4 ~x ~y ~w ~h =
+    { x; y; w; h }
 
-let make = make2
+  let make = make2
 
-let move r ~x ~y =
-  { r with x; y }
+end
 
-external has_intersection : a:rect_t -> b:rect_t -> bool
+module Point = struct
+  type t = {
+    x: int;
+    y: int;
+  }
+end
+
+external has_intersection : a:Rect.t -> b:Rect.t -> bool
   = "caml_SDL_HasIntersection"
 
-external intersect_rect_and_line : rect:rect_t -> p1:int * int -> p2:int * int ->
-  (int * int * int * int) option
+external intersect_rect_and_line : rect:Rect.t ->
+  x1:int -> y1:int -> x2:int -> y2:int -> (int * int * int * int) option
   = "caml_SDL_IntersectRectAndLine"
 
-external point_in_rect : p:int * int -> r:rect_t -> bool
+external point_in_rect : p:Point.t -> r:Rect.t -> bool
   = "caml_SDL_PointInRect"

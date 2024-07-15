@@ -1,1 +1,0 @@
-type renderer_t
