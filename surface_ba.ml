@@ -10,10 +10,10 @@
 *)
 (* Surface definition and management *)
 
-type t = Surface.t
+type surface_ba_t = Surface.surface_t
 
-external get_pixels :
-  t -> (int, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
+external surface_ba_get_pixels :
+  surface_ba_t -> (int, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
   = "caml_SDL_Surface_ba_get_pixels"
 
 external create_rgb_surface_from :
@@ -22,7 +22,7 @@ external create_rgb_surface_from :
   r_mask:int32 ->
   g_mask:int32 ->
   b_mask:int32 ->
-  a_mask:int32 -> t
+  a_mask:int32 -> surface_ba_t
   = "caml_SDL_CreateRGBSurfaceFrom_bytecode"
     "caml_SDL_CreateRGBSurfaceFrom"
 

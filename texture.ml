@@ -10,30 +10,31 @@
 *)
 (* Textures *)
 
-type t
+open Blendmode
+type texture_t
 
-external create_from_surface :
-  Render_type.renderer -> Surface.t -> t
+external create_texture_from_surface :
+  Render_type.renderer_t -> Surface.surface_t -> texture_t
   = "caml_SDL_CreateTextureFromSurface"
 
-external set_blend_mode : t -> BlendMode.t -> unit
+external set_texture_blend_mode : texture_t -> BlendMode.t -> unit
   = "caml_SDL_SetTextureBlendMode" [@@noalloc]
 
-external get_blend_mode : t -> BlendMode.t
+external get_texture_blend_mode : texture_t -> BlendMode.t
   = "caml_SDL_GetTextureBlendMode"
 
-external set_alpha_mod : t -> alpha:int -> unit
+external set_texture_alpha_mod : texture_t -> alpha:int -> unit
   = "caml_SDL_SetTextureAlphaMod"
 
-external get_alpha_mod : t -> int
+external get_texture_alpha_mod : texture_t -> int
   = "caml_SDL_GetTextureAlphaMod"
 
-external set_color_mod : t -> int * int * int -> unit
+external set_texture_color_mod : texture_t -> int * int * int -> unit
   = "caml_SDL_SetTextureColorMod"
 
-external set_color_mod3 : t -> r:int -> g:int -> b:int -> unit
+external set_texture_color_mod3 : texture_t -> r:int -> g:int -> b:int -> unit
   = "caml_SDL_SetTextureColorMod3"
 
-external get_color_mod : t -> int * int * int
+external get_texture_color_mod : texture_t -> int * int * int
   = "caml_SDL_GetTextureColorMod"
 

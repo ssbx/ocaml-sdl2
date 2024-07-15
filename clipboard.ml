@@ -1,20 +1,12 @@
-(* OCamlSDL2 - An OCaml interface to the SDL2 library
- Copyright (C) 2013 Florent Monnier
- 
- This software is provided "AS-IS", without any express or implied warranty.
- In no event will the authors be held liable for any damages arising from
- the use of this software.
- 
- Permission is granted to anyone to use this software for any purpose,
- including commercial applications, and to alter it and redistribute it freely.
-*)
-(* Clipboard Handling *)
 
-external set_text : text:string -> int
+(**
+   {{https://wiki.libsdl.org/SDL2/CategoryClipboard}CategoryClipboard} *)
+
+external set_clipboard_text : text:string -> int
   = "caml_SDL_SetClipboardText"
 
-external get_text : unit -> string
+external get_clipboard_text : unit -> string
   = "caml_SDL_GetClipboardText"
 
-external has_text : unit -> bool
+external has_clipboard_text : unit -> bool
   = "caml_SDL_HasClipboardText"

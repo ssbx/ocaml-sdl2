@@ -18,7 +18,7 @@
 #include "render_stub.h"
 #include "texture_stub.h"
 #include "surface_stub.h"
-#include "blendMode_stub.h"
+#include "blendmode_stub.h"
 
 CAMLprim value
 caml_SDL_CreateTextureFromSurface(value renderer, value surface)

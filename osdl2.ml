@@ -1,37 +1,26 @@
 
 include Init
-include Quit
+include Rect
 
-external get_platform : unit -> string = "caml_SDL_GetPlatform"
+include TextureAccess
+include Keycode
+include Keycode
+include Scancode
+include Blendmode
+include Pixel
+include Surface
+include Surface_ba
+include Timer
+include Events
+include Haptic
+include Version
+include Texture
+include Render
+include Rwops
+include Power
+include Mouse
+include Keyboard
+include Joystick
+include Video
 
-module Rect = Rect
-module PixelFormat = PixelFormat
-module TextureAccess = TextureAccess
-module Keymod = Keymod
-module Keycode = Keycode
-module Scancode = Scancode
-module Window = Window
-module BlendMode = BlendMode
-module Error = Error
-module Pixel = Pixel
-module Surface = Surface
-module Surface_ba = Surface_ba
-module Timer = Timer
-module Event = Event
-module Haptic = Haptic
-module Version = Version
-module Texture = Texture
-module Render = Render
-module RWops = Rwops
-module Power = Power
-module Mouse = Mouse
-module Keyboard = Keyboard
-module Audio = Audio
-module Clipboard = Clipboard
-module CPUinfo = Cpuinfo
-module Filesystem = Filesystem
-module Joystick = Joystick
-module GL = Gl
-module Hints = Hints
-module HintPriority = HintPriority
-
+module SDL = Sdl

@@ -1,29 +1,26 @@
-(* OCamlSDL2 - An OCaml interface to the SDL2 library
- Copyright (C) 2013 Florent Monnier
-
- This software is provided "AS-IS", without any express or implied warranty.
- In no event will the authors be held liable for any damages arising from
- the use of this software.
-
- Permission is granted to anyone to use this software for any purpose,
- including commercial applications, and to alter it and redistribute it freely.
-*)
-(** Initialisation *)
-
-type subsystem = [
-  | `TIMER
-  | `AUDIO
-  | `VIDEO
-  | `JOYSTICK
-  | `HAPTIC
-  | `GAMECONTROLLER
-  | `EVENTS
-  | `EVERYTHING
-  | `NOPARACHUTE
+module Subsystem = struct
+  type t = [
+  | `SDL_INIT_TIMER
+  | `SDL_INIT_AUDIO
+  | `SDL_INIT_VIDEO
+  | `SDL_INIT_JOYSTICK
+  | `SDL_INIT_HAPTIC
+  | `SDL_INIT_GAMECONTROLLER
+  | `SDL_INIT_EVENTS
+  | `SDL_INIT_EVERYTHING
+  | `SDL_INIT_NOPARACHUTE
   ]
+end
 
-external init : subsystem list -> unit = "caml_SDL_Init"
-  (*[< subsystem | `EVERYTHING | `NOPARACHUTE ] list -> unit*)
+external init : Subsystem.t list -> unit
+  = "caml_SDL_Init"
+(*[< subsystem | `EVERYTHING | `NOPARACHUTE ] list -> unit*)
 
+external init_subsystem : Subsystem.t list -> unit
+  = "caml_SDL_InitSubSystem"
 
-external init_subsystem : subsystem list -> unit = "caml_SDL_InitSubSystem"
+external quit : unit -> unit
+  = "caml_SDL_Quit"
+
+external quit_requested : unit -> bool
+  = "caml_SDL_QuitRequested"

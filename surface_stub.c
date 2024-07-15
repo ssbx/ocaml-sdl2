@@ -18,8 +18,8 @@
 #include <SDL_surface.h>
 #include "surface_stub.h"
 #include "rect_stub.h"
-#include "blendMode_stub.h"
-#include "pixelFormat_stub.h"
+#include "blendmode_stub.h"
+#include "pixel_stub.h"
 
 #include <string.h>
 

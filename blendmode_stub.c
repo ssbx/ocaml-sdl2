@@ -1,10 +1,10 @@
 /* OCamlSDL2 - An OCaml interface to the SDL2 library
  Copyright (C) 2013 Florent Monnier
- 
+
  This software is provided "AS-IS", without any express or implied warranty.
  In no event will the authors be held liable for any damages arising from
  the use of this software.
- 
+
  Permission is granted to anyone to use this software for any purpose,
  including commercial applications, and to alter it and redistribute it freely.
 */
@@ -20,6 +20,7 @@
 #define Val_Sdl_BlendMode_Blend Val_int(1)
 #define Val_Sdl_BlendMode_Add   Val_int(2)
 #define Val_Sdl_BlendMode_Mod   Val_int(3)
+#define Val_Sdl_BlendMode_Mul   Val_int(4)
 
 value
 Val_SDL_BlendMode(SDL_BlendMode blend_mode)

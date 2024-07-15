@@ -14,9 +14,28 @@
 #include <caml/alloc.h>
 #include <caml/fail.h>
 
+#include <SDL.h>
 #include <SDL_hints.h>
-#include "hintPriority_stub.h"
 
+const Uint32 caml_sdl_hintpriority_table[] = {
+    SDL_HINT_DEFAULT,
+    SDL_HINT_NORMAL,
+    SDL_HINT_OVERRIDE
+};
+
+value
+Val_Sdl_hintpriority_t(int hint_priority)
+{
+    switch (hint_priority) {
+    case SDL_HINT_DEFAULT:    return Val_int(0);
+    case SDL_HINT_NORMAL: return Val_int(1);
+    case SDL_HINT_OVERRIDE:    return Val_int(2);
+    }
+    caml_failwith("Sdl_hintprority.t");
+}
+
+#define Sdl_hintpriority_t(v) \
+    caml_sdl_hintpriority_table[Int_val(v)]
 
 CAMLprim value
 caml_SDL_SetHintWithPriority(value hint, value valstr, value priority)
@@ -62,29 +81,3 @@ caml_SDL_GetHint(value hint)
 }
 
 
-
-/*
-CAMLprim value
-caml_SDL_GetTicks_d(value unit)
-{
-    CAMLparam1(unit);
-    CAMLlocal1(ret);
-    static const Uint32 th = 1000;
-    Uint32 ticks = SDL_GetTicks();
-    Uint32 sec = ticks / th;
-    Uint32 msec = ticks - sec * th;
-    ret = caml_alloc(2, 0);
-    Store_field(ret, 0, Val_int(sec));
-    Store_field(ret, 1, Val_int(msec));
-    CAMLreturn(ret);
-}
-
-CAMLprim value
-caml_SDL_Delay(value ms)
-{
-    CAMLparam1(ms);
-    SDL_Delay(Long_val(ms));
-    CAMLreturn(Val_unit);
-}
-*/
-/* vim: set ts=4 sw=4 et: */

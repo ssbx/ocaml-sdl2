@@ -16,13 +16,13 @@
 
 #include <SDL_render.h>
 #include "render_stub.h"
-#include "window_stub.h"
+#include "video_stub.h"
 #include "texture_stub.h"
 #include "surface_stub.h"
 #include "rect_stub.h"
 #include "point_stub.h"
-#include "blendMode_stub.h"
-#include "pixelFormat_stub.h"
+#include "blendmode_stub.h"
+#include "pixel_stub.h"
 #include "textureAccess_stub.h"
 
 CAMLprim value

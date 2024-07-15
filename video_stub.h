@@ -1,5 +1,5 @@
-#ifndef _CAML_SDL_window_
-#define _CAML_SDL_window_
+#ifndef _CAML_SDL_VIDEO_
+#define _CAML_SDL_VIDEO_
 
 static value Val_SDL_Window(SDL_Window * p)
 {
@@ -13,4 +13,4 @@ static SDL_Window * SDL_Window_val(value v)
 
 Uint32 Val_SDL_WindowFlags(value mask_list);
 
-#endif /* _CAML_SDL_window_ */
+#endif /* _CAML_SDL_VIDEO_ */

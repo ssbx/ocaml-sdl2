@@ -18,39 +18,32 @@
  (modes native)
  (install_c_headers
    audio_stub
-   blendMode_stub
-   keymod_stub
-   pixelFormat_stub
-   textureAccess_stub
-   hintPriority_stub
+   blendmode_stub
+   keycode_stub
    pixel_stub
+   textureAccess_stub
    point_stub
    rect_stub
    render_stub
    rwops_stub
    surface_stub
    texture_stub
-   window_stub)
+   video_stub)
  (foreign_stubs
   (language c)
   (names
-    video_stub
     rect_stub
-    pixelFormat_stub
     textureAccess_stub
     pixel_stub
     hints_stub
-    hintPriority_stub
-    keymod_stub
+    keycode_stub
     error_stub
-    blendMode_stub
+    blendmode_stub
     surface_stub
     surface_ba_stub
-    window_stub
     init_stub
-    quit_stub
     timer_stub
-    event_stub
+    events_stub
     version_stub
     texture_stub
     render_stub
@@ -63,7 +56,7 @@
     cpuinfo_stub
     filesystem_stub
     joystick_stub
-    gl_stub
+    video_stub
     platform_stub
     )
   (flags :standard (:include c_flags.sexp)))

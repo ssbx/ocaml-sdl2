@@ -1,5 +1,5 @@
 
-type t = Static | Streaming | Target
+type texture_access_t = Static | Streaming | Target
 
 let to_string = function
   | Static    -> "SDL_TEXTUREACCESS_STATIC"

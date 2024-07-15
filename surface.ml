@@ -1,94 +1,84 @@
-(* OCamlSDL2 - An OCaml interface to the SDL2 library
- Copyright (C) 2013 Florent Monnier
+type surface_t
+open Blendmode
+open Pixel
 
- This software is provided "AS-IS", without any express or implied warranty.
- In no event will the authors be held liable for any damages arising from
- the use of this software.
-
- Permission is granted to anyone to use this software for any purpose,
- including commercial applications, and to alter it and redistribute it freely.
-*)
-(* Surface definition and management *)
-
-type t
-
-external create_rgb :
+external create_rgb_surface :
   width:int ->
   height:int ->
-  depth:int -> t
+  depth:int -> surface_t
   = "caml_SDL_CreateRGBSurface"
 
-external free : t -> unit
+external free_surface : surface_t -> unit
   = "caml_SDL_FreeSurface"
 
-external load_bmp : filename:string -> t
+external load_bmp : filename:string -> surface_t
   = "caml_SDL_LoadBMP"
 
-external save_bmp : t -> filename:string -> unit
+external save_bmp : surface_t -> filename:string -> unit
   = "caml_SDL_SaveBMP"
 
 external fill_rect :
-  dst:t -> rect:Rect.t ->
+  dst:surface_t -> rect:Rect.rect_t ->
   color:int32 -> unit
   = "caml_SDL_FillRect"
 
 external blit_surface :
-  src:t -> src_rect:Rect.t ->
-  dst:t -> dst_rect:Rect.t ->
-  Rect.t
+  src:surface_t -> src_rect:Rect.rect_t ->
+  dst:surface_t -> dst_rect:Rect.rect_t ->
+  Rect.rect_t
   = "caml_SDL_BlitSurface"
 
 external blit_surf :
-  src:t -> dst:t -> dst_rect:Rect.t ->
-  Rect.t
+  src:surface_t -> dst:surface_t -> dst_rect:Rect.rect_t ->
+  Rect.rect_t
   = "caml_SDL_BlitSurf"
 
 external blit_surfs :
-  src:t -> dst:t -> dst_rect:Rect.t -> unit
+  src:surface_t -> dst:surface_t -> dst_rect:Rect.rect_t -> unit
   = "caml_SDL_BlitSurfs"
 
-external blit_pixels_unsafe :
-  t -> string -> unit
+external surface_blit_pixels_unsafe :
+  surface_t -> string -> unit
   = "caml_SDL_Surface_Blit_Pixels"
 
-external set_color_key : t -> enable:bool -> key:int32 -> unit
+external set_color_key : surface_t -> enable:bool -> key:int32 -> unit
   = "caml_SDL_SetColorKey"
 
-external set_color_key_map_rgb : t -> enable:bool ->
+external set_color_key_map_rgb : surface_t -> enable:bool ->
   rgb:(int * int * int) -> unit
   = "caml_SDL_SetColorKey_MapRGB"
 
-external get_width : t -> int = "caml_SDL_SurfaceGetWidth"
-external get_height : t -> int = "caml_SDL_SurfaceGetHeight"
+external get_surface_width : surface_t -> int = "caml_SDL_SurfaceGetWidth"
+external get_surface_height : surface_t -> int = "caml_SDL_SurfaceGetHeight"
 
-external get_dims : t -> int * int = "caml_SDL_SurfaceGetDims"
+external get_surface_dims : surface_t -> int * int = "caml_SDL_SurfaceGetDims"
 
-external get_pitch : t -> int = "caml_SDL_SurfaceGetPitch"
+external get_surface_pitch : surface_t -> int = "caml_SDL_SurfaceGetPitch"
 
-external get_pixel32_unsafe : t -> x:int -> y:int -> int32
+external get_surface_pixel32_unsafe : surface_t -> x:int -> y:int -> int32
   = "caml_SDL_SurfaceGetPixel32"
 
-external get_pixel16_unsafe : t -> x:int -> y:int -> int32
+external get_surface_pixel16_unsafe : surface_t -> x:int -> y:int -> int32
   = "caml_SDL_SurfaceGetPixel16"
 
-external get_pixel8_unsafe : t -> x:int -> y:int -> int32
+external get_surface_pixel8_unsafe : surface_t -> x:int -> y:int -> int32
   = "caml_SDL_SurfaceGetPixel8"
 
-external get_bits_per_pixel : t -> int
+external get_surface_bits_per_pixel : surface_t -> int
   = "caml_SDL_SurfaceGetBitsPerPixel"
 
-external has_palette : t -> bool
+external surface_has_palette : surface_t -> bool
   = "caml_SDL_SurfaceHasPalette"
 
-external palette_num_colors : t -> int
+external surface_palette_colors : surface_t -> int
   = "caml_SDL_SurfacePaletteColors"
 
-external set_blend_mode : t -> BlendMode.t -> unit
+external set_surface_blend_mode : surface_t -> BlendMode.t -> unit
   = "caml_SDL_SetSurfaceBlendMode"
 
-external get_pixelformat_t : t -> PixelFormat.t
+external surface_get_pixelformat_t : surface_t -> PixelFormat.t
   = "caml_SDL_Surface_get_pixelformat_t"
 
-external get_pixels : t -> string
+external surface_get_pixels : surface_t -> string
   = "caml_SDL_Surface_get_pixels"
 

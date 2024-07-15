@@ -24,6 +24,7 @@ caml_SDL_GetTicks(value unit)
     CAMLreturn(Val_long(ticks));
 }
 
+/*
 CAMLprim value
 caml_SDL_GetTicks_d(value unit)
 {
@@ -38,6 +39,7 @@ caml_SDL_GetTicks_d(value unit)
     Store_field(ret, 1, Val_int(msec));
     CAMLreturn(ret);
 }
+*/
 
 CAMLprim value
 caml_SDL_Delay(value ms)
