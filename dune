@@ -16,6 +16,7 @@
  (public_name osdl2)
  (name sdl)
  (modes native)
+ ; TODO do i really need these headers?
  (install_c_headers
    blendmode_stub
    keycode_stub
