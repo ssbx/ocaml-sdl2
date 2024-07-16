@@ -6,7 +6,7 @@
 (generate_opam_files true)
 
 (source
- (github ssbx/caml-libsdl2))
+  (github ssbx/caml-libsdl2))
 
 (authors "Seb")
 
@@ -18,11 +18,13 @@
 
 (use_standard_c_and_cxx_flags true)
 
+(formatting (enabled_for ocaml))
+
 (package
- (name caml-libsdl2)
- (synopsis "Bindings to the SDL2 library")
- (description "Bindings to the SDL2 library")
- (depends ocaml dune conf-sdl2)
- (tags
-  (topics autio bindings graphics media opengl input)))
+  (name caml-libsdl2)
+  (synopsis "Bindings to the SDL2 library")
+  (description "Bindings to the SDL2 library")
+  (depends ocaml dune conf-sdl2)
+  (tags
+    (topics autio bindings graphics media opengl input)))
 
