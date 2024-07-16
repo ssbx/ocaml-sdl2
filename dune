@@ -13,7 +13,7 @@
     (system "echo -n '('; pkg-config --libs sdl2; echo -n ')'"))))
 
 (library
- (public_name osdl2)
+ (public_name caml-libsdl2)
  (name sdl)
  (modes native)
  (install_c_headers

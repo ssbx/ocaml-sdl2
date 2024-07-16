@@ -7,9 +7,9 @@ maintainer: ["Seb"]
 authors: ["Seb"]
 license: "BSD Zero Clause License"
 tags: ["topics" "autio" "bindings" "graphics" "media" "opengl" "input"]
-homepage: "https://github.com/ssbx/osdl2"
-doc: "https://github.com/ssbx/osdl2"
-bug-reports: "https://github.com/ssbx/osdl2/issues"
+homepage: "https://github.com/ssbx/caml-libsdl2"
+doc: "https://github.com/ssbx/caml-libsdl2"
+bug-reports: "https://github.com/ssbx/caml-libsdl2/issues"
 depends: [
   "ocaml"
   "dune" {>= "3.15"}
@@ -30,4 +30,4 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/ssbx/osdl2.git"
+dev-repo: "git+https://github.com/ssbx/caml-libsdl2.git"

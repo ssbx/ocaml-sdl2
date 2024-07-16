@@ -1,7 +1,4 @@
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryInit}CategoryInit} *)
-
 module Subsystem = struct
   type t = [
   | `SDL_INIT_TIMER
@@ -29,8 +26,6 @@ external quit : unit -> unit
 external quit_requested : unit -> bool
   = "caml_SDL_QuitRequested"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryAudio}CategoryAudio} *)
 
 module AudioBuffer   = struct type t end
 module AudioDeviceID = struct type t end
@@ -133,8 +128,6 @@ external pause_audio_device : AudioDeviceID.t -> unit
 external close_audio_device : AudioDeviceID.t -> unit
   = "caml_SDL_CloseAudioDevice"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryRect}CategoryRect} *)
 
 module Rect = struct
   type t = {
@@ -174,8 +167,6 @@ external intersect_rect_and_line : rect:Rect.t ->
 external point_in_rect : p:Point.t -> r:Rect.t -> bool
   = "caml_SDL_PointInRect"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryPixel}CategoryPixel} *)
 
 module PixelFormat = struct
   type t =
@@ -402,8 +393,6 @@ external get_RGB : pixel:int32 -> fmt:PixelFormat.allocated -> rgb
 external get_RGBA : pixel:int32 -> fmt:PixelFormat.allocated -> rgba
   = "caml_SDL_GetRGBA"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryBlendmode}CategoryBlendmode} *)
 
 module BlendMode = struct
   type t =
@@ -431,8 +420,6 @@ module BlendMode = struct
 end
 
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryClipboard}CategoryClipboard} *)
 
 external set_clipboard_text : text:string -> int
   = "caml_SDL_SetClipboardText"
@@ -444,14 +431,10 @@ external has_clipboard_text : unit -> bool
   = "caml_SDL_HasClipboardText"
 
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryCPUInfo}CategoryCPUInfo} *)
 
 external get_CPU_count : unit -> int
   = "caml_SDL_GetCPUCount"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryError}CategoryError} *)
 
 external get_error : unit -> string
   = "caml_SDL_GetError"
@@ -459,8 +442,6 @@ external get_error : unit -> string
 external clear_error : unit -> unit
   = "caml_SDL_ClearError"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryFilesystem}CategoryFilesystem} *)
 
 external get_base_path : unit -> string
   = "caml_SDL_GetBasePath"
@@ -469,8 +450,6 @@ external get_pref_path : org:string -> app:string -> string
   = "caml_SDL_GetPrefPath"
 
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryHints}CategoryHints} *)
 
 module HintPriority = struct
   type t = Default | Normal | Override
@@ -497,8 +476,6 @@ external set_hint : string -> string -> unit
 external set_hint_with_priority : string -> string -> HintPriority.t -> unit
   = "caml_SDL_SetHintWithPriority"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryHaptic}CategoryHaptic} *)
 
 module HapticPosition = struct
   type t = {
@@ -555,8 +532,6 @@ module HapticDirection = struct
     | _ -> invalid_arg "of_string"
 end
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryJoystic}CategoryJoystic} *)
 module Joystick = struct type t end
 
 external num_joysticks : unit -> int
@@ -583,8 +558,6 @@ external joystick_get_axis : Joystick.t -> axis:int -> int
 external joystick_get_button : Joystick.t -> button:int -> int
   = "caml_SDL_JoystickGetButton"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryKeyboard}CategoryKeyboard} *)
 
 external start_text_input : unit -> unit
   = "caml_SDL_StartTextInput"
@@ -601,8 +574,6 @@ external set_text_input_rect : Rect.t -> unit
 external has_screen_keyboard_support : unit -> bool
   = "caml_SDL_HasScreenKeyboardSupport"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryKeycode}CategoryKeycode} *)
 
 module Keycode = struct
   type t =
@@ -1367,8 +1338,6 @@ module Keymod = struct
 
 end
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryScancode}CategoryScancode} *)
 
 module Scancode = struct
   type t =
@@ -2099,14 +2068,10 @@ module Scancode = struct
 end
 
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryPlatform}CategoryPlatform} *)
 
 external get_platform : unit -> string = "caml_SDL_GetPlatform"
 
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryPower}CategoryPower} *)
 
 module PowerState = struct
   type t = [
@@ -2122,8 +2087,6 @@ external get_power_info : unit -> PowerState.t * int * int
   = "caml_SDL_GetPowerInfo"
 
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryVersion}CategoryVersion} *)
 
 module Version = struct
   type t = {
@@ -2147,16 +2110,12 @@ external get_revision_number : unit -> int
 
 
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryTimer}CategoryTimer} *)
 
 
 external get_ticks : unit -> int = "caml_SDL_GetTicks" [@@noalloc]
 
 external delay : ms:int -> unit = "caml_SDL_Delay"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryRWops}CategoryRWops} *)
 
 module RWops = struct
   type t
@@ -2258,8 +2217,6 @@ let from_input_opt = function
   | `String(mem) -> Some(rw_from_const_mem mem)
   | _ -> None
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategorySurface}CategorySurface} *)
 
 module Surface = struct
   type t
@@ -2369,24 +2326,16 @@ external create_rgb_surface_from :
   = "caml_SDL_CreateRGBSurfaceFrom_bytecode"
     "caml_SDL_CreateRGBSurfaceFrom"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryVideo}CategoryVideo} *)
-
 module WindowEventID = struct
-
-  type point = {
-    x: int;
-    y: int;
-  }
 
   type t =
     | SDL_WINDOWEVENT_NONE
     | SDL_WINDOWEVENT_SHOWN
     | SDL_WINDOWEVENT_HIDDEN
     | SDL_WINDOWEVENT_EXPOSED
-    | SDL_WINDOWEVENT_MOVED of point
-    | SDL_WINDOWEVENT_RESIZED of point
-    | SDL_WINDOWEVENT_SIZE_CHANGED of point
+    | SDL_WINDOWEVENT_MOVED of Point.t
+    | SDL_WINDOWEVENT_RESIZED of Point.t
+    | SDL_WINDOWEVENT_SIZE_CHANGED of Point.t
     | SDL_WINDOWEVENT_MINIMIZED
     | SDL_WINDOWEVENT_MAXIMIZED
     | SDL_WINDOWEVENT_RESTORED
@@ -2554,8 +2503,6 @@ external destroy_window : Window.t -> unit
 external get_window_size : Window.t -> (int * int)
   = "caml_SDL_GetWindowSize"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryRender}CategoryRender} *)
 
 module Renderer = struct type t end
 
@@ -2769,8 +2716,6 @@ external set_texture_color_mod3 : Texture.t -> r:int -> g:int -> b:int -> unit
 external get_texture_color_mod : Texture.t -> int * int * int
   = "caml_SDL_GetTextureColorMod"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryEvents}CategoryEvents} *)
 
 module KeyState = struct
   type t =
@@ -3009,8 +2954,6 @@ end
 external poll_event : unit -> Event.t option
   = "caml_SDL_PollEvent"
 
-(**
-   {{https://wiki.libsdl.org/SDL2/CategoryMouse}CategoryMouse} *)
 
 module MouseButton = struct
   type t =

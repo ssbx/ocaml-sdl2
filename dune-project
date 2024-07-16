@@ -1,12 +1,12 @@
 (lang dune 3.15)
 
-(name osdl2)
+(name caml-libsdl2)
 (version 1.0)
 
 (generate_opam_files true)
 
 (source
- (github ssbx/osdl2))
+ (github ssbx/caml-libsdl2))
 
 (authors "Seb")
 
@@ -14,16 +14,15 @@
 
 (license "BSD Zero Clause License")
 
-(documentation https://github.com/ssbx/osdl2)
+(documentation https://github.com/ssbx/caml-libsdl2)
 
 (use_standard_c_and_cxx_flags true)
 
 (package
- (name osdl2)
+ (name caml-libsdl2)
  (synopsis "Bindings to the SDL2 library")
  (description "Bindings to the SDL2 library")
  (depends ocaml dune conf-sdl2)
  (tags
   (topics autio bindings graphics media opengl input)))
 
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
