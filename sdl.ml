@@ -2310,6 +2310,7 @@ module WindowFlags = struct
     | Mouse_Focus
     | FullScreen_Desktop
     | Foreign
+    | Allow_HighDPI
 end
 
 module WindowPos = struct

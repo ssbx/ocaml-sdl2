@@ -417,6 +417,7 @@ module WindowFlags : sig
     | Mouse_Focus
     | FullScreen_Desktop
     | Foreign
+    | Allow_HighDPI
 end
 
 module WindowPos : sig
