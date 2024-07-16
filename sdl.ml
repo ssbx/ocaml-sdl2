@@ -77,10 +77,10 @@ module AudioStatus = struct
   ;;
 end
 
-(** Ocasdl internals *)
+(** internals *)
 external new_audio_spec : unit -> AudioSpec.t = "caml_SDL_alloc_audio_spec"
 
-(** Ocasdl internals *)
+(** internals *)
 external free_audio_spec : AudioSpec.t -> unit = "caml_SDL_free_audio_spec"
 
 external get_audio_drivers : unit -> string array = "caml_SDL_GetAudioDrivers"

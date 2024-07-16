@@ -1,6 +1,5 @@
 .PHONY: build test t clean dev_install doc fmt
 
-
 build:
 	dune build
 
