@@ -16,12 +16,13 @@
  (public_name osdl2)
  (name sdl)
  (modes native)
- ; TODO do i really need these headers?
  (install_c_headers
+   audio_stub
    blendmode_stub
    keycode_stub
    pixel_stub
    rect_stub
+   render_stub
    surface_stub
    video_stub)
  (foreign_stubs

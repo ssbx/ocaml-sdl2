@@ -15,6 +15,7 @@
 #include <caml/fail.h>
 
 #include <SDL_audio.h>
+#include "audio_stub.h"
 
 const SDL_AudioFormat ocaml_SDL_AudioFormat_table[] = {
     AUDIO_U8,
@@ -63,9 +64,6 @@ Val_SDL_AudioFormat(SDL_AudioFormat format)
     }
     caml_failwith("SdlAudiFormat.t");
 }
-
-#define SDL_AudioFormat_val(format) \
-    ocaml_SDL_AudioFormat_table[Long_val(format)]
 
 CAMLprim value
 caml_SDL_GetAudioDrivers(value unit)

@@ -16,42 +16,18 @@
 
 #include <SDL_render.h>
 
+#include "render_stub.h"
 #include "video_stub.h"
 #include "surface_stub.h"
 #include "rect_stub.h"
 #include "blendmode_stub.h"
 #include "pixel_stub.h"
 
-static value Val_SDL_Renderer(SDL_Renderer * p)
-{
-    return caml_copy_nativeint((intnat) p);
-}
-
-static SDL_Renderer * SDL_Renderer_val(value v)
-{
-    return (SDL_Renderer *) Nativeint_val(v);
-}
-
-static value Val_SDL_Texture(SDL_Texture * p)
-{
-    return caml_copy_nativeint((intnat) p);
-}
-
-static SDL_Texture * SDL_Texture_val(value v)
-{
-    return (SDL_Texture *) Nativeint_val(v);
-}
-
-value Val_Sdl_textureaccess_t(int texture_access);
-
-const Uint32 caml_sdl_textureaccess_table[] = {
+const int caml_sdl_textureaccess_table[] = {
     SDL_TEXTUREACCESS_STATIC,
     SDL_TEXTUREACCESS_STREAMING,
     SDL_TEXTUREACCESS_TARGET
 };
-
-#define Sdl_textureaccess_t(v) \
-    caml_sdl_textureaccess_table[Int_val(v)]
 
 value
 Val_Sdl_textureaccess_t(int texture_access)
