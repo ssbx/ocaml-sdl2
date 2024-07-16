@@ -17,15 +17,7 @@
 
 #include <SDL_rwops.h>
 
-static value Val_SDL_RWops(SDL_RWops * p)
-{
-    return caml_copy_nativeint((intnat) p);
-}
-
-static SDL_RWops * SDL_RWops_val(value v)
-{
-    return (SDL_RWops *) Nativeint_val(v);
-}
+#include "rwops_stub.h"
 
 #if OCAML_VERSION < 40600
 #define Bytes_val(x) String_val(x)
