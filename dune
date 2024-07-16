@@ -23,6 +23,7 @@
    pixel_stub
    rect_stub
    render_stub
+   rwops_stub
    surface_stub
    video_stub)
  (foreign_stubs
