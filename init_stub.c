@@ -55,23 +55,25 @@ Sdl_init_val(value mask_list)
 CAMLprim value
 caml_SDL_Init(value init_flags)
 {
+    CAMLparam1(init_flags);
     int r = SDL_Init(Sdl_init_val(init_flags));
     if (r < 0) caml_failwith("Sdl.init");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_InitSubSystem(value init_flags)
 {
+    CAMLparam1(init_flags);
     int r = SDL_InitSubSystem(Sdl_init_val(init_flags));
     if (r < 0) caml_failwith("Sdl.init_subsystem");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_Quit(value unit)
 {
-    CAMLparam0();
+    CAMLparam1(unit);
     SDL_Quit();
     CAMLreturn(Val_unit);
 }
@@ -83,7 +85,7 @@ void SDL_QuitSubSystem(Uint32 flags);
 CAMLprim value
 caml_SDL_QuitRequested(value unit)
 {
-    CAMLparam0();
+    CAMLparam1(unit);
     SDL_bool b = SDL_QuitRequested();
     CAMLreturn(Val_bool(b));
 }

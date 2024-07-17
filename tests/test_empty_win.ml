@@ -2,7 +2,7 @@ let () =
   Sdl.init [ `SDL_INIT_VIDEO ];
   let width, height = 320, 240 in
   let _ =
-    Sdl.create_window_2
+    Sdl.create_window
       ~title:"Let's try SDL2 with OCaml!"
       ~x:`undefined
       ~y:`undefined

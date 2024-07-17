@@ -104,8 +104,9 @@ Val_Sdl_pixelformat_t(Uint32 pixel_format)
 CAMLprim value
 caml_SDL_GetPixelFormatName(value format)
 {
+    CAMLparam1(format);
     const char * name = SDL_GetPixelFormatName(Sdl_pixelformat_t(format));
-    return caml_copy_string(name);
+    CAMLreturn(caml_copy_string(name));
 }
 
 static value Val_SDL_PixelFormat(SDL_PixelFormat * p)
@@ -121,15 +122,17 @@ static SDL_PixelFormat * SDL_PixelFormat_val(value v)
 CAMLprim value
 caml_SDL_AllocFormat(value pixel_format)
 {
+    CAMLparam1(pixel_format);
     SDL_PixelFormat * px_fmt = SDL_AllocFormat(Sdl_pixelformat_t(pixel_format));
-    return Val_SDL_PixelFormat(px_fmt);
+    CAMLreturn(Val_SDL_PixelFormat(px_fmt));
 }
 
 CAMLprim value
 caml_SDL_FreeFormat(value format)
 {
+    CAMLparam1(format);
     SDL_FreeFormat(SDL_PixelFormat_val(format));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 #define UInt32_val(v)   Int32_val((v))
@@ -139,6 +142,7 @@ caml_SDL_FreeFormat(value format)
 CAMLprim value
 caml_SDL_MapRGB(value format, value rgb)
 {
+    CAMLparam2(format, rgb);
     value r = Field(rgb,0);
     value g = Field(rgb,1);
     value b = Field(rgb,2);
@@ -148,12 +152,13 @@ caml_SDL_MapRGB(value format, value rgb)
             UInt8_val(g),
             UInt8_val(b));
 
-    return caml_copy_int32(px);
+    CAMLreturn(caml_copy_int32(px));
 }
 
 CAMLprim value
 caml_SDL_MapRGBA(value format, value rgba)
 {
+    CAMLparam2(format, rgba);
     value r = Field(rgba,0);
     value g = Field(rgba,1);
     value b = Field(rgba,2);
@@ -165,7 +170,7 @@ caml_SDL_MapRGBA(value format, value rgba)
             UInt8_val(b),
             UInt8_val(a));
 
-    return caml_copy_int32(px);
+    CAMLreturn(caml_copy_int32(px));
 }
 
 CAMLprim value

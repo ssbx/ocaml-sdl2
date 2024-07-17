@@ -681,20 +681,22 @@ caml_SDL_GetRendererOutputSize(value renderer)
 CAMLprim value
 caml_SDL_CreateTextureFromSurface(value renderer, value surface)
 {
+    CAMLparam2(renderer, surface);
     SDL_Texture *tex =
         SDL_CreateTextureFromSurface(
                 SDL_Renderer_val(renderer),
                 SDL_Surface_val(surface));
     if (!tex)
         caml_failwith("Sdltexture.create_from_surface");
-    return Val_SDL_Texture(tex);
+    CAMLreturn(Val_SDL_Texture(tex));
 }
 
 CAMLprim value
 caml_SDL_DestroyTexture(value texture)
 {
+    CAMLparam1(texture);
     SDL_DestroyTexture(SDL_Texture_val(texture));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 #define Uint8_val Int_val
@@ -703,18 +705,20 @@ caml_SDL_DestroyTexture(value texture)
 CAMLprim value
 caml_SDL_SetTextureAlphaMod(value texture, value alpha)
 {
+    CAMLparam2(texture, alpha);
     int r =
         SDL_SetTextureAlphaMod(
             SDL_Texture_val(texture),
             Uint8_val(alpha));
     if (r)
         caml_failwith("Sdltexture.set_alpha_mod");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_GetTextureAlphaMod(value texture)
 {
+    CAMLparam1(texture);
     Uint8 alpha;
     int r =
         SDL_GetTextureAlphaMod(
@@ -722,12 +726,13 @@ caml_SDL_GetTextureAlphaMod(value texture)
             &alpha);
     if (r)
         caml_failwith("Sdltexture.get_alpha_mod");
-    return Val_uint8(alpha);
+    CAMLreturn(Val_uint8(alpha));
 }
 
 CAMLprim value
 caml_SDL_SetTextureColorMod(value texture, value rgb)
 {
+    CAMLparam2(texture, rgb);
     value r = Field(rgb,0);
     value g = Field(rgb,1);
     value b = Field(rgb,2);
@@ -737,37 +742,40 @@ caml_SDL_SetTextureColorMod(value texture, value rgb)
             Uint8_val(r), Uint8_val(g), Uint8_val(b));
     if (s)
         caml_failwith("Sdltexture.set_color_mod");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_SetTextureColorMod3(
         value texture, value r, value g, value b)
 {
+    CAMLparam4(texture, r, g, b);
     int s =
         SDL_SetTextureColorMod(
             SDL_Texture_val(texture),
             Uint8_val(r), Uint8_val(g), Uint8_val(b));
     if (s)
         caml_failwith("Sdltexture.set_color_mod3");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_SetTextureBlendMode(value texture, value blendMode)
 {
+    CAMLparam2(texture, blendMode);
     int r =
         SDL_SetTextureBlendMode(
             SDL_Texture_val(texture),
             SDL_BlendMode_val(blendMode));
     if (r)
         caml_failwith("Sdltexture.set_blend_mode");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_GetTextureBlendMode(value texture)
 {
+    CAMLparam1(texture);
     SDL_BlendMode blendMode;
     int r =
         SDL_GetTextureBlendMode(
@@ -775,7 +783,7 @@ caml_SDL_GetTextureBlendMode(value texture)
             &blendMode);
     if (r)
         caml_failwith("Sdltexture.get_blend_mode");
-    return Val_SDL_BlendMode(blendMode);
+    CAMLreturn(Val_SDL_BlendMode(blendMode));
 }
 
 CAMLprim value

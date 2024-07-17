@@ -26,60 +26,67 @@
 CAMLprim value
 caml_SDL_RWFromMem(value str)
 {
+    CAMLparam1(str);
     SDL_RWops * rwo =
         SDL_RWFromMem(
                 Bytes_val(str),
                 caml_string_length(str));
-    return Val_SDL_RWops(rwo);
+    CAMLreturn(Val_SDL_RWops(rwo));
 }
 
 CAMLprim value
 caml_SDL_RWFromConstMem(value str)
 {
+    CAMLparam1(str);
     SDL_RWops * rwo =
         SDL_RWFromConstMem(
                 String_val(str),
                 caml_string_length(str));
-    return Val_SDL_RWops(rwo);
+    CAMLreturn(Val_SDL_RWops(rwo));
 }
 
 CAMLprim value
 caml_SDL_RWFromFile(value file, value mode)
 {
+    CAMLparam2(file, mode);
     SDL_RWops * rwo =
         SDL_RWFromFile(
                 String_val(file),
                 String_val(mode));
     if (rwo == NULL) caml_failwith("Sdlrwops.from_file");
-    return Val_SDL_RWops(rwo);
+    CAMLreturn(Val_SDL_RWops(rwo));
 }
 
 CAMLprim value
 caml_SDL_AllocRW(value unit)
 {
+    CAMLparam1(unit);
     SDL_RWops * rwo = SDL_AllocRW();
-    return Val_SDL_RWops(rwo);
+    CAMLreturn(Val_SDL_RWops(rwo));
 }
 
 CAMLprim value
 caml_SDL_FreeRW(value rwo)
 {
+    CAMLparam1(rwo);
     SDL_FreeRW(SDL_RWops_val(rwo));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_CloseRW(value rwo)
 {
+    CAMLparam1(rwo);
     SDL_RWclose(SDL_RWops_val(rwo));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_RWsize(value rwo)
 {
+    CAMLparam1(rwo);
     Sint64 size = SDL_RWsize(SDL_RWops_val(rwo));
-    return caml_copy_int64(size);
+    CAMLreturn(caml_copy_int64(size));
 }
 
 static const int ocaml_SDL_RW_SEEK_table[] = {
@@ -93,6 +100,7 @@ static const int ocaml_SDL_RW_SEEK_table[] = {
 CAMLprim value
 caml_SDL_RWseek(value context, value offset, value whence)
 {
+    CAMLparam3(context, offset, whence);
     // returns the final offset in the data stream, or -1 on error.
     Sint64 r =
         SDL_RWseek(
@@ -100,15 +108,16 @@ caml_SDL_RWseek(value context, value offset, value whence)
                 Int64_val(offset),
                 SDL_RW_SEEK_val(whence));
 
-    return caml_copy_int64(r);
+    CAMLreturn(caml_copy_int64(r));
 }
 
 CAMLprim value
 caml_SDL_RWtell(value context)
 {
+    CAMLparam1(context);
     // returns the current offset in the data stream, or -1 on error.
     Sint64 r = SDL_RWtell(SDL_RWops_val(context));
-    return caml_copy_int64(r);
+    CAMLreturn(caml_copy_int64(r));
 }
 
 #define Uint8_val(d) (Int_val(d))
@@ -145,10 +154,11 @@ read_int_stub(Uint64, SDL_ReadBE64)
 CAMLprim value
 caml_SDL_WriteU8(value rwo, Uint8 d)
 {
+    CAMLparam2(rwo, d);
     // Returns 1 on successful write, 0 on error.
     size_t s = SDL_WriteU8(SDL_RWops_val(rwo), Uint8_val(d));
     if (s == 0) caml_failwith("Sdlrwops.writeU8");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 #endif
 

@@ -19,71 +19,24 @@
 #include "surface_stub.h"
 #include "rect_stub.h"
 
-/*
-typedef struct
-{
-    Uint32 format;
-    int w;
-    int h;
-    int refresh_rate;
-    void *driverdata;
-} SDL_DisplayMode;
+static const Uint32 caml_sdl_windowflags_table[] = {
+    SDL_WINDOW_FULLSCREEN,
+    SDL_WINDOW_OPENGL,
+    SDL_WINDOW_SHOWN,
+    SDL_WINDOW_HIDDEN,
+    SDL_WINDOW_BORDERLESS,
+    SDL_WINDOW_RESIZABLE,
+    SDL_WINDOW_MINIMIZED,
+    SDL_WINDOW_MAXIMIZED,
+    SDL_WINDOW_INPUT_GRABBED,
+    SDL_WINDOW_INPUT_FOCUS,
+    SDL_WINDOW_MOUSE_FOCUS,
+    SDL_WINDOW_FULLSCREEN_DESKTOP,
+    SDL_WINDOW_FOREIGN,
+    SDL_WINDOW_ALLOW_HIGHDPI
+};
 
-typedef struct SDL_Window SDL_Window;
-
-typedef enum
-{
-    SDL_WINDOW_FULLSCREEN   = 0x00000001,
-    SDL_WINDOW_OPENGL       = 0x00000002,
-    SDL_WINDOW_SHOWN        = 0x00000004,
-    SDL_WINDOW_HIDDEN       = 0x00000008,
-    SDL_WINDOW_BORDERLESS   = 0x00000010,
-    SDL_WINDOW_RESIZABLE    = 0x00000020,
-    SDL_WINDOW_MINIMIZED    = 0x00000040,
-    SDL_WINDOW_MAXIMIZED    = 0x00000080,
-    SDL_WINDOW_INPUT_GRABBED= 0x00000100,
-    SDL_WINDOW_INPUT_FOCUS  = 0x00000200,
-    SDL_WINDOW_MOUSE_FOCUS  = 0x00000400,
-	SDL_WINDOW_FULLSCREEN_DESKTOP = ( SDL_WINDOW_FULLSCREEN | 0x00001000 ),
-    SDL_WINDOW_FOREIGN      = 0x00000800
-} SDL_WindowFlags;
-
-#define SDL_WINDOWPOS_UNDEFINED_MASK    0x1FFF0000
-#define SDL_WINDOWPOS_UNDEFINED_DISPLAY(X)  (SDL_WINDOWPOS_UNDEFINED_MASK|(X))
-#define SDL_WINDOWPOS_UNDEFINED         SDL_WINDOWPOS_UNDEFINED_DISPLAY(0)
-#define SDL_WINDOWPOS_ISUNDEFINED(X)    \
-            (((X)&0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK)
-
-#define SDL_WINDOWPOS_CENTERED_MASK    0x2FFF0000
-#define SDL_WINDOWPOS_CENTERED_DISPLAY(X)  (SDL_WINDOWPOS_CENTERED_MASK|(X))
-#define SDL_WINDOWPOS_CENTERED         SDL_WINDOWPOS_CENTERED_DISPLAY(0)
-#define SDL_WINDOWPOS_ISCENTERED(X)    \
-            (((X)&0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK)
-
-typedef enum
-{
-    SDL_WINDOWEVENT_NONE,
-    SDL_WINDOWEVENT_SHOWN,
-    SDL_WINDOWEVENT_HIDDEN,
-    SDL_WINDOWEVENT_EXPOSED,
-    SDL_WINDOWEVENT_MOVED,
-    SDL_WINDOWEVENT_RESIZED,
-    SDL_WINDOWEVENT_SIZE_CHANGED,
-    SDL_WINDOWEVENT_MINIMIZED,
-    SDL_WINDOWEVENT_MAXIMIZED,
-    SDL_WINDOWEVENT_RESTORED,
-    SDL_WINDOWEVENT_ENTER,
-    SDL_WINDOWEVENT_LEAVE,
-    SDL_WINDOWEVENT_FOCUS_GAINED,
-    SDL_WINDOWEVENT_FOCUS_LOST,
-    SDL_WINDOWEVENT_CLOSE
-
-} SDL_WindowEventID;
-
-typedef void *SDL_GLContext;
-
-typedef enum
-{
+static const SDL_GLattr ocaml_sdl_glattr_table[] = {
     SDL_GL_RED_SIZE,
     SDL_GL_GREEN_SIZE,
     SDL_GL_BLUE_SIZE,
@@ -107,96 +60,9 @@ typedef enum
     SDL_GL_CONTEXT_FLAGS,
     SDL_GL_CONTEXT_PROFILE_MASK,
     SDL_GL_SHARE_WITH_CURRENT_CONTEXT
-} SDL_GLattr;
-
-typedef enum
-{
-    SDL_GL_CONTEXT_PROFILE_CORE           = 0x0001,
-    SDL_GL_CONTEXT_PROFILE_COMPATIBILITY  = 0x0002,
-    SDL_GL_CONTEXT_PROFILE_ES             = 0x0004
-} SDL_GLprofile;
-
-typedef enum
-{
-    SDL_GL_CONTEXT_DEBUG_FLAG              = 0x0001,
-    SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002,
-    SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG      = 0x0004,
-    SDL_GL_CONTEXT_RESET_ISOLATION_FLAG    = 0x0008
-} SDL_GLcontextFlag;
-
-
-int SDL_GetNumVideoDrivers(void);
-
-const char * SDL_GetVideoDriver(int index);
-
-int SDL_VideoInit(const char *driver_name);
-
-void SDL_VideoQuit(void);
-
-const char * SDL_GetCurrentVideoDriver(void);
-
-int SDL_GetNumVideoDisplays(void);
-
-const char * SDL_GetDisplayName(int displayIndex);
-
-int SDL_GetDisplayBounds(int displayIndex, SDL_Rect * rect);
-
-int SDL_GetNumDisplayModes(int displayIndex);
-
-int
-SDL_GetDisplayMode(
-            int displayIndex,
-            int modeIndex,
-            SDL_DisplayMode * mode);
-
-int
-SDL_GetDesktopDisplayMode(
-            int displayIndex,
-            SDL_DisplayMode * mode);
-
-int
-SDL_GetCurrentDisplayMode(
-            int displayIndex,
-            SDL_DisplayMode * mode);
-
-SDL_DisplayMode *
-SDL_GetClosestDisplayMode(
-            int displayIndex,
-            const SDL_DisplayMode * mode,
-            SDL_DisplayMode * closest);
-
-int SDL_GetWindowDisplayIndex(SDL_Window * window);
-
-int
-SDL_SetWindowDisplayMode(
-            SDL_Window * window,
-            const SDL_DisplayMode * mode);
-
-int
-SDL_GetWindowDisplayMode(
-            SDL_Window * window,
-            SDL_DisplayMode * mode);
-
-Uint32 SDL_GetWindowPixelFormat(SDL_Window * window);
-
-*/
-
-static const Uint32 caml_sdl_windowflags_table[] = {
-    SDL_WINDOW_FULLSCREEN,
-    SDL_WINDOW_OPENGL,
-    SDL_WINDOW_SHOWN,
-    SDL_WINDOW_HIDDEN,
-    SDL_WINDOW_BORDERLESS,
-    SDL_WINDOW_RESIZABLE,
-    SDL_WINDOW_MINIMIZED,
-    SDL_WINDOW_MAXIMIZED,
-    SDL_WINDOW_INPUT_GRABBED,
-    SDL_WINDOW_INPUT_FOCUS,
-    SDL_WINDOW_MOUSE_FOCUS,
-    SDL_WINDOW_FULLSCREEN_DESKTOP,
-    SDL_WINDOW_FOREIGN,
-    SDL_WINDOW_ALLOW_HIGHDPI
 };
+#define SDL_GLattr_val(v) \
+    ocaml_sdl_glattr_table[Long_val(v)]
 
 Uint32
 Val_SDL_WindowFlags(value mask_list)
@@ -237,38 +103,16 @@ caml_SDL_WindowPos(value pos)
         caml_failwith("Sdlwindow.window_pos");
     }
 }
-
 CAMLprim value
 caml_SDL_CreateWindow(
-        value title,
-        value pos,
-        value dims,
-        value flags)
-{
-    int _x = caml_SDL_WindowPos(Field(pos,0));
-    int _y = caml_SDL_WindowPos(Field(pos,1));
-
-    SDL_Window *win =
-        SDL_CreateWindow(
-                String_val(title),
-                _x, _y,
-                Int_val(Field(dims,0)),
-                Int_val(Field(dims,1)),
-                Val_SDL_WindowFlags(flags));
-
-    if (win == NULL)
-        caml_failwith("Sdlwindow.create");
-
-    return Val_SDL_Window(win);
-}
-
-CAMLprim value
-caml_SDL_CreateWindow2(
         value title,
         value x, value y,
         value w, value h,
         value flags)
 {
+    CAMLparam5(title,x,y,w,h);
+    CAMLxparam1(flags);
+
     int _x = caml_SDL_WindowPos(x);
     int _y = caml_SDL_WindowPos(y);
 
@@ -280,73 +124,28 @@ caml_SDL_CreateWindow2(
                 Val_SDL_WindowFlags(flags));
 
     if (win == NULL)
-        caml_failwith("Sdlwindow.create2");
+        caml_failwith("Sdlwindow.create");
 
-    return Val_SDL_Window(win);
+    CAMLreturn(Val_SDL_Window(win));
 }
 
 CAMLprim value
-caml_SDL_CreateWindow2_bc(value * argv, int argn)
+caml_SDL_CreateWindow_bc(value * argv, int argn)
 {
-    return caml_SDL_CreateWindow2(
+    return caml_SDL_CreateWindow(
                 argv[0], argv[1], argv[2],
                 argv[3], argv[4], argv[5]);
 }
 
-/*
-SDL_Window * SDL_CreateWindowFrom(const void *data);
-
-Uint32 SDL_GetWindowID(SDL_Window * window);
-
-SDL_Window * SDL_GetWindowFromID(Uint32 id);
-
-Uint32 SDL_GetWindowFlags(SDL_Window * window);
-*/
-
 CAMLprim value
 caml_SDL_SetWindowTitle(value window, value title)
 {
+    CAMLparam2(window, title);
     SDL_SetWindowTitle(
             SDL_Window_val(window),
             String_val(title));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
-
-/*
-const char * SDL_GetWindowTitle(SDL_Window * window);
-
-void
-SDL_SetWindowIcon(
-            SDL_Window * window,
-            SDL_Surface * icon);
-
-void*
-SDL_SetWindowData(
-            SDL_Window * window,
-            const char *name,
-            void *userdata);
-
-void *
-SDL_GetWindowData(
-            SDL_Window * window,
-            const char *name);
-
-void
-SDL_SetWindowPosition(
-            SDL_Window * window,
-            int x, int y);
-
-void
-SDL_GetWindowPosition(
-            SDL_Window * window,
-            int *x, int *y);
-
-void
-SDL_SetWindowSize(
-            SDL_Window * window,
-            int w, int h);
-
-*/
 
 CAMLprim value
 caml_SDL_GetWindowSize(value window)
@@ -363,74 +162,52 @@ caml_SDL_GetWindowSize(value window)
     CAMLreturn(ret);
 }
 
-/*
-void
-SDL_SetWindowMinimumSize(
-            SDL_Window * window,
-            int min_w,
-            int min_h);
-
-void
-SDL_GetWindowMinimumSize(
-            SDL_Window * window,
-            int *w,
-            int *h);
-
-void
-SDL_SetWindowMaximumSize(
-            SDL_Window * window,
-            int max_w,
-            int max_h);
-
-void
-SDL_GetWindowMaximumSize(SDL_Window * window, int *w, int *h);
-
-void
-SDL_SetWindowBordered(
-            SDL_Window * window,
-            SDL_bool bordered);
-*/
-
 CAMLprim value
 caml_SDL_ShowWindow(value window)
 {
+    CAMLparam1(window);
     SDL_ShowWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_HideWindow(value window)
 {
+    CAMLparam1(window);
     SDL_HideWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_RaiseWindow(value window)
 {
+    CAMLparam1(window);
     SDL_RaiseWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_MaximizeWindow(value window)
 {
+    CAMLparam1(window);
     SDL_MaximizeWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_MinimizeWindow(value window)
 {
+    CAMLparam1(window);
     SDL_MinimizeWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_RestoreWindow(value window)
 {
+    CAMLparam1(window);
     SDL_RestoreWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 /* TODO:
@@ -440,17 +217,19 @@ int SDL_SetWindowFullscreen(SDL_Window * window, Uint32 flags);
 CAMLprim value
 caml_SDL_GetWindowSurface(value window)
 {
-    SDL_Surface *surf =
-        SDL_GetWindowSurface(SDL_Window_val(window));
-    return Val_SDL_Surface(surf);
+    CAMLparam1(window);
+    SDL_Surface *surf = SDL_GetWindowSurface(SDL_Window_val(window));
+    CAMLreturn(Val_SDL_Surface(surf));
 }
 
 CAMLprim value
 caml_SDL_UpdateWindowSurface(value window)
 {
+    CAMLparam1(window);
     int r = SDL_UpdateWindowSurface(SDL_Window_val(window));
-    if (r) caml_failwith("Sdlwindow.update_surface");
-    return Val_unit;
+    if (r)
+        caml_failwith("Sdlwindow.update_surface");
+    CAMLreturn(Val_unit);
 }
 
 /* TODO
@@ -465,16 +244,19 @@ SDL_bool SDL_GetWindowGrab(SDL_Window * window);
 CAMLprim value
 caml_SDL_SetWindowBrightness(value window, value brightness)
 {
+    CAMLparam2(window, brightness);
     int r = SDL_SetWindowBrightness(SDL_Window_val(window), Double_val(brightness));
-    if (r) caml_failwith("Sdlwindow.set_brightness");
-    return Val_unit;
+    if (r)
+        caml_failwith("Sdlwindow.set_brightness");
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_GetWindowBrightness(value window)
 {
+    CAMLparam1(window);
     float brightness = SDL_GetWindowBrightness(SDL_Window_val(window));
-    return caml_copy_double(brightness);
+    CAMLreturn(caml_copy_double(brightness));
 }
 
 /* TODO
@@ -494,8 +276,9 @@ int SDL_GetWindowGammaRamp(
 CAMLprim value
 caml_SDL_DestroyWindow(value window)
 {
+    CAMLparam1(window);
     SDL_DestroyWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 /*
@@ -506,7 +289,6 @@ void SDL_EnableScreenSaver(void);
 void SDL_DisableScreenSaver(void);
 */
 
-/* vim: set ts=4 sw=4 et: */
 /* TODO
 int SDL_GL_LoadLibrary(const char *path);
 void * SDL_GL_GetProcAddress(const char *proc);
@@ -515,121 +297,92 @@ void * SDL_GL_GetProcAddress(const char *proc);
 CAMLprim value
 caml_SDL_GL_UnloadLibrary(value unit)
 {
+    CAMLparam1(unit);
     SDL_GL_UnloadLibrary();
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_GL_ExtensionSupported(value extension)
 {
+    CAMLparam1(extension);
     SDL_bool b = SDL_GL_ExtensionSupported(String_val(extension));
-    return Val_bool(b);
-}
-
-static const SDL_GLattr ocaml_sdl_glattr_table[] = {
-    SDL_GL_RED_SIZE,
-    SDL_GL_GREEN_SIZE,
-    SDL_GL_BLUE_SIZE,
-    SDL_GL_ALPHA_SIZE,
-    SDL_GL_BUFFER_SIZE,
-    SDL_GL_DOUBLEBUFFER,
-    SDL_GL_DEPTH_SIZE,
-    SDL_GL_STENCIL_SIZE,
-    SDL_GL_ACCUM_RED_SIZE,
-    SDL_GL_ACCUM_GREEN_SIZE,
-    SDL_GL_ACCUM_BLUE_SIZE,
-    SDL_GL_ACCUM_ALPHA_SIZE,
-    SDL_GL_STEREO,
-    SDL_GL_MULTISAMPLEBUFFERS,
-    SDL_GL_MULTISAMPLESAMPLES,
-    SDL_GL_ACCELERATED_VISUAL,
-    SDL_GL_RETAINED_BACKING,
-    SDL_GL_CONTEXT_MAJOR_VERSION,
-    SDL_GL_CONTEXT_MINOR_VERSION,
-    SDL_GL_CONTEXT_EGL,
-    SDL_GL_CONTEXT_FLAGS,
-    SDL_GL_CONTEXT_PROFILE_MASK,
-    SDL_GL_SHARE_WITH_CURRENT_CONTEXT
-};
-#define SDL_GLattr_val(v) \
-    ocaml_sdl_glattr_table[Long_val(v)]
-
-CAMLprim value
-caml_SDL_GL_SetAttribute(
-        value attr, value val)
-{
-    int r =
-        SDL_GL_SetAttribute(
-            SDL_GLattr_val(attr),
-            Int_val(val));
-    if (r) caml_failwith("Sdlgl.set_attribute");
-    return Val_unit;
+    CAMLreturn(Val_bool(b));
 }
 
 CAMLprim value
-caml_SDL_GL_GetAttribute(
-        value attr)
+caml_SDL_GL_SetAttribute(value attr, value val)
 {
+    CAMLparam2(attr, val);
+    int r = SDL_GL_SetAttribute(
+                SDL_GLattr_val(attr),
+                Int_val(val));
+    if (r)
+        caml_failwith("Sdlgl.set_attribute");
+    CAMLreturn(Val_unit);
+}
+
+CAMLprim value
+caml_SDL_GL_GetAttribute(value attr)
+{
+    CAMLparam1(attr);
     int val;
-    int r =
-        SDL_GL_GetAttribute(
-            SDL_GLattr_val(attr),
-            &val);
-    if (r) caml_failwith("Sdlgl.get_attribute");
-    return Val_int(val);
-}
-
-// SDL_GLContext is an alias for void*
-static value Val_SDL_GLContext(SDL_GLContext p)
-{
-    return caml_copy_nativeint((intnat) p);
-}
-
-static SDL_GLContext SDL_GLContext_val(value v)
-{
-    return (SDL_GLContext) Nativeint_val(v);
+    int r = SDL_GL_GetAttribute(
+                SDL_GLattr_val(attr),
+                &val);
+    if (r)
+        caml_failwith("Sdlgl.get_attribute");
+    CAMLreturn(Val_int(val));
 }
 
 CAMLprim value
 caml_SDL_GL_CreateContext(value window)
 {
+    CAMLparam1(window);
     SDL_GLContext ctx = SDL_GL_CreateContext(SDL_Window_val(window));
-    return Val_SDL_GLContext(ctx);
+    CAMLreturn(Val_SDL_GLContext(ctx));
 }
 
 CAMLprim value
 caml_SDL_GL_MakeCurrent(value window, value context)
 {
+    CAMLparam2(window, context);
     int r = SDL_GL_MakeCurrent(
-            SDL_Window_val(window), SDL_GLContext_val(context));
-    return Val_int(r);
+                SDL_Window_val(window),
+                SDL_GLContext_val(context));
+    CAMLreturn(Val_int(r));
 }
 
 CAMLprim value
 caml_SDL_GL_SetSwapInterval(value interval)
 {
+    CAMLparam1(interval);
     int r = SDL_GL_SetSwapInterval(Int_val(interval));
     if (r) caml_failwith("Sdlgl.set_swap_interval");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_GL_GetSwapInterval(value unit)
 {
+    CAMLparam1(unit);
     int r = SDL_GL_GetSwapInterval();
-    return Val_int(r);
+    CAMLreturn(Val_int(r));
 }
 
 CAMLprim value
 caml_SDL_GL_SwapWindow(value window)
 {
+    CAMLparam1(window);
     SDL_GL_SwapWindow(SDL_Window_val(window));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_GL_DeleteContext(value context)
 {
+    CAMLparam1(context);
     SDL_GL_DeleteContext(SDL_GLContext_val(context));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
+/* vim: set ts=4 sw=4 et: */

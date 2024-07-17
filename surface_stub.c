@@ -29,6 +29,7 @@ caml_SDL_CreateRGBSurface(
         value height,
         value depth)
 {
+    CAMLparam3(width, height, depth);
     Uint32 flags = 0;
     Uint32 Rmask = 0;
     Uint32 Gmask = 0;
@@ -44,31 +45,34 @@ caml_SDL_CreateRGBSurface(
         Gmask,
         Bmask,
         Amask);
-    return Val_SDL_Surface(surf);
+    CAMLreturn(Val_SDL_Surface(surf));
 }
 
 CAMLprim value
 caml_SDL_FreeSurface(value surf)
 {
+    CAMLparam1(surf);
     SDL_FreeSurface(SDL_Surface_val(surf));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_LoadBMP(value filename)
 {
+    CAMLparam1(filename);
     SDL_Surface *surf = SDL_LoadBMP(String_val(filename));
     if (surf == NULL)
         caml_failwith("Sdlsurface.load_bmp");
-    return Val_SDL_Surface(surf);
+    CAMLreturn(Val_SDL_Surface(surf));
 }
 
 CAMLprim value
 caml_SDL_SaveBMP(value surf, value filename)
 {
+    CAMLparam2(surf, filename);
     int r = SDL_SaveBMP(SDL_Surface_val(surf), String_val(filename));
     if (r) caml_failwith("Sdlsurface.save_bmp");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
@@ -77,13 +81,14 @@ caml_SDL_FillRect(
         value rect,
         value color)
 {
+    CAMLparam3(dst, rect, color);
     SDL_Rect _rect;
     SDL_Rect_val(&_rect, rect);
     int r = SDL_FillRect(
         SDL_Surface_val(dst), &_rect,
         Int32_val(color));
     if (r) caml_failwith("Sdlsurface.fill_rect");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
@@ -139,58 +144,64 @@ CAMLprim value
 caml_SDL_Surface_Blit_Pixels(
         value surf, value pixels_buffer)
 {
+    CAMLparam2(surf, pixels_buffer);
     SDL_Surface *surface = SDL_Surface_val(surf);
     memcpy(surface->pixels,
         String_val(pixels_buffer),
         caml_string_length(pixels_buffer));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
-caml_SDL_SetColorKey(value surface, value flag, value key)
+caml_SDL_SetColorKey(value surf, value flag, value key)
 {
+    CAMLparam3(surf, flag, key);
     /* TODO:
      *  You can pass SDL_RLEACCEL to enable RLE accelerated blits.
      */
     int r = SDL_SetColorKey(
-        SDL_Surface_val(surface), Bool_val(flag), Int32_val(key));
+        SDL_Surface_val(surf), Bool_val(flag), Int32_val(key));
     if (r) caml_failwith("Sdlsurface.set_color_key");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
-caml_SDL_SetColorKey_MapRGB(value surface, value flag, value rgb)
+caml_SDL_SetColorKey_MapRGB(value surf, value flag, value rgb)
 {
+    CAMLparam3(surf, flag, rgb);
     int r = SDL_SetColorKey(
-        SDL_Surface_val(surface),
+        SDL_Surface_val(surf),
         Bool_val(flag),
         SDL_MapRGB(
-            SDL_Surface_val(surface)->format,
+            SDL_Surface_val(surf)->format,
             Int_val(Field(rgb,0)),
             Int_val(Field(rgb,1)),
             Int_val(Field(rgb,2)) ) );
 
     if (r) caml_failwith("Sdlsurface.set_color_key_map_rgb");
 
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
-caml_SDL_SurfaceGetWidth(value surface)
+caml_SDL_SurfaceGetWidth(value surf)
 {
-    return Val_int(SDL_Surface_val(surface)->w);
+    CAMLparam1(surf);
+    CAMLreturn(Val_int(SDL_Surface_val(surf)->w));
 }
 
 CAMLprim value
-caml_SDL_SurfaceGetHeight(value surface)
+caml_SDL_SurfaceGetHeight(value surf)
 {
-    return Val_int(SDL_Surface_val(surface)->h);
+    CAMLparam1(surf);
+    CAMLreturn(Val_int(SDL_Surface_val(surf)->h));
 }
 
 CAMLprim value
-caml_SDL_SurfaceGetPitch(value surface)
+caml_SDL_SurfaceGetPitch(value surf)
 {
-    return Val_int(SDL_Surface_val(surface)->pitch);
+    CAMLparam1(surf);
+    CAMLreturn(Val_int(SDL_Surface_val(surf)->pitch));
 }
 
 CAMLprim value
@@ -205,37 +216,40 @@ caml_SDL_SurfaceGetDims(value surface)
 }
 
 CAMLprim value
-caml_SDL_SurfaceGetPixel32(value surface, value x, value y)
+caml_SDL_SurfaceGetPixel32(value surf, value x, value y)
 {
-    Uint32 *pixels = (Uint32 *) SDL_Surface_val(surface)->pixels;
-    int width = SDL_Surface_val(surface)->w;
+    CAMLparam3(surf, x, y);
+    Uint32 *pixels = (Uint32 *) SDL_Surface_val(surf)->pixels;
+    int width = SDL_Surface_val(surf)->w;
     int ofs = (Long_val(y) * width) + Long_val(x);
-    return caml_copy_int32(pixels[ofs]);
+    CAMLreturn(caml_copy_int32(pixels[ofs]));
 }
 
 CAMLprim value
-caml_SDL_SurfaceGetPixel16(value surface, value x, value y)
+caml_SDL_SurfaceGetPixel16(value surf, value x, value y)
 {
-    Uint16 *pixels = (Uint16 *) SDL_Surface_val(surface)->pixels;
-    int width = SDL_Surface_val(surface)->w;
+    CAMLparam3(surf, x, y);
+    Uint16 *pixels = (Uint16 *) SDL_Surface_val(surf)->pixels;
+    int width = SDL_Surface_val(surf)->w;
     int ofs = (Long_val(y) * width) + Long_val(x);
-    return caml_copy_int32(pixels[ofs]);
+    CAMLreturn(caml_copy_int32(pixels[ofs]));
 }
 
 CAMLprim value
-caml_SDL_SurfaceGetPixel8(value surface, value x, value y)
+caml_SDL_SurfaceGetPixel8(value surf, value x, value y)
 {
-    Uint8 *pixels = (Uint8 *) SDL_Surface_val(surface)->pixels;
-    int width = SDL_Surface_val(surface)->w;
+    CAMLparam3(surf, x, y);
+    Uint8 *pixels = (Uint8 *) SDL_Surface_val(surf)->pixels;
+    int width = SDL_Surface_val(surf)->w;
     int ofs = (Long_val(y) * width) + Long_val(x);
-    return caml_copy_int32(pixels[ofs]);
+    CAMLreturn(caml_copy_int32(pixels[ofs]));
 }
 
 CAMLprim value
-caml_SDL_SurfaceGetBitsPerPixel(value surface)
+caml_SDL_SurfaceGetBitsPerPixel(value surf)
 {
-    return Val_int(
-        SDL_Surface_val(surface)->format->BitsPerPixel);
+    CAMLparam1(surf);
+    CAMLreturn(Val_int(SDL_Surface_val(surf)->format->BitsPerPixel));
 }
 
 static inline SDL_bool
@@ -255,41 +269,44 @@ SDL_SurfacePaletteColors(SDL_Surface * surface)
 }
 
 CAMLprim value
-caml_SDL_SurfaceHasPalette(value surface)
+caml_SDL_SurfaceHasPalette(value surf)
 {
-    SDL_bool b = SDL_SurfaceHasPalette(SDL_Surface_val(surface));
-    return Val_bool(b);
+    CAMLparam1(surf);
+    SDL_bool b = SDL_SurfaceHasPalette(SDL_Surface_val(surf));
+    CAMLreturn(Val_bool(b));
 }
 
 CAMLprim value
-caml_SDL_SurfacePaletteColors(value surface)
+caml_SDL_SurfacePaletteColors(value surf)
 {
-    return Val_int(
-        SDL_SurfacePaletteColors(SDL_Surface_val(surface)));
+    CAMLparam1(surf);
+    CAMLreturn(Val_int(SDL_SurfacePaletteColors(SDL_Surface_val(surf))));
 }
 
 CAMLprim value
 caml_SDL_SetSurfaceBlendMode(
-        value surface,
+        value surf,
         value blendMode)
 {
+    CAMLparam2(surf, blendMode);
     int r =
         SDL_SetSurfaceBlendMode(
-            SDL_Surface_val(surface),
+            SDL_Surface_val(surf),
             SDL_BlendMode_val(blendMode));
     if (r) caml_failwith("Sdlsurface.set_blend_mode");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
-caml_SDL_Surface_get_pixelformat_t(value surface)
+caml_SDL_Surface_get_pixelformat_t(value surf)
 {
+    CAMLparam1(surf);
     SDL_PixelFormat *pixel_format =
-        SDL_Surface_val(surface)->format;
+        SDL_Surface_val(surf)->format;
 
     Uint32 format = pixel_format->format;
 
-    return Val_Sdl_pixelformat_t(format);
+    CAMLreturn(Val_Sdl_pixelformat_t(format));
 }
 
 CAMLprim value
@@ -315,6 +332,7 @@ caml_SDL_Surface_get_pixels(value surface)
 CAMLprim value
 caml_SDL_Surface_ba_get_pixels(value surface)
 {
+    CAMLparam1(surface);
     SDL_Surface *surf = SDL_Surface_val(surface);
 
     int b_flag = 0;
@@ -325,7 +343,7 @@ caml_SDL_Surface_ba_get_pixels(value surface)
 
     b_flag |= CAML_BA_C_LAYOUT | CAML_BA_EXTERNAL ;
 
-    return caml_ba_alloc(b_flag, 1, surf->pixels, &dim);
+    CAMLreturn(caml_ba_alloc(b_flag, 1, surf->pixels, &dim));
 }
 
 #define Uint32_val(d) (Int32_val(d))
@@ -335,6 +353,8 @@ caml_SDL_CreateRGBSurfaceFrom(
         value pixels, value width, value height, value depth, value pitch,
         value Rmask, value Gmask, value Bmask, value Amask)
 {
+    CAMLparam5(pixels, width, height, depth, pitch);
+    CAMLxparam4(Rmask, Gmask, Bmask, Amask);
     SDL_Surface *surf =
         SDL_CreateRGBSurfaceFrom(
             (void *) Caml_ba_data_val(pixels),
@@ -347,7 +367,7 @@ caml_SDL_CreateRGBSurfaceFrom(
             Uint32_val(Bmask),
             Uint32_val(Amask));
 
-    return Val_SDL_Surface(surf);
+    CAMLreturn(Val_SDL_Surface(surf));
 }
 
 CAMLprim value

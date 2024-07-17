@@ -145,29 +145,33 @@ caml_SDL_GetAudioStatus(value unit)
 CAMLprim value
 caml_SDL_PauseAudio(value pause_on)
 {
+    CAMLparam1(pause_on);
     SDL_PauseAudio(Bool_val(pause_on));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_LockAudio(value unit)
 {
+    CAMLparam1(unit);
     SDL_LockAudio();
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_UnlockAudio(value unit)
 {
+    CAMLparam1(unit);
     SDL_UnlockAudio();
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_CloseAudio(value unit)
 {
+    CAMLparam1(unit);
     SDL_CloseAudio();
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 static value Val_SDL_AudioSpec(SDL_AudioSpec * p)
@@ -183,16 +187,18 @@ static SDL_AudioSpec * SDL_AudioSpec_val(value v)
 CAMLprim value
 caml_SDL_alloc_audio_spec(value unit)
 {
+    CAMLparam1(unit);
     SDL_AudioSpec *audio_spec;
     audio_spec = malloc(sizeof(SDL_AudioSpec));
-    return Val_SDL_AudioSpec(audio_spec);
+    CAMLreturn(Val_SDL_AudioSpec(audio_spec));
 }
 
 CAMLprim value
 caml_SDL_free_audio_spec(value audio_spec)
 {
+    CAMLparam1(audio_spec);
     free(SDL_AudioSpec_val(audio_spec));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
@@ -219,8 +225,9 @@ caml_SDL_LoadWAV(
 CAMLprim value
 caml_SDL_FreeWAV(value audio_buf)
 {
+    CAMLparam1(audio_buf);
     SDL_FreeWAV((Uint8 *) audio_buf);
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 #define Val_SDL_AudioDeviceID caml_copy_int32
@@ -229,17 +236,19 @@ caml_SDL_FreeWAV(value audio_buf)
 CAMLprim value
 caml_SDL_OpenAudioDevice_simple(value spec)
 {
+    CAMLparam1(spec);
     SDL_AudioDeviceID deviceId =
         SDL_OpenAudioDevice(
                 NULL, 0, SDL_AudioSpec_val(spec), NULL, 0);
     if (deviceId == 0)
         caml_failwith("Sdlaudio.open_audio_device_simple");
-    return Val_SDL_AudioDeviceID(deviceId);
+    CAMLreturn(Val_SDL_AudioDeviceID(deviceId));
 }
 
 CAMLprim value
 caml_SDL_QueueAudio(value dev, value data, value len)
 {
+    CAMLparam3(dev, data, len);
     int success =
         SDL_QueueAudio(
                 SDL_AudioDeviceID_val(dev),
@@ -247,34 +256,37 @@ caml_SDL_QueueAudio(value dev, value data, value len)
                 (Uint32)Int32_val(len));
     if (success != 0)
         caml_failwith("Sdlaudio.queue_audio");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_UnpauseAudioDevice(value dev)
 {
+    CAMLparam1(dev);
     int pause_on = 0;
     SDL_PauseAudioDevice(
             SDL_AudioDeviceID_val(dev),
             pause_on);
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_PauseAudioDevice(value dev)
 {
+    CAMLparam1(dev);
     int pause_on = 1;
     SDL_PauseAudioDevice(
             SDL_AudioDeviceID_val(dev),
             pause_on);
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_CloseAudioDevice(value dev)
 {
+    CAMLparam1(dev);
     SDL_CloseAudioDevice(SDL_AudioDeviceID_val(dev));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 #if 0

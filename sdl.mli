@@ -506,21 +506,13 @@ external get_attribute : GLattr.t -> int = "caml_SDL_GL_GetAttribute"
 
 external create_window
   :  title:string
-  -> pos:WindowPos.t * WindowPos.t
-  -> dims:int * int
-  -> flags:WindowFlags.t list
-  -> Window.t
-  = "caml_SDL_CreateWindow"
-
-external create_window_2
-  :  title:string
   -> x:WindowPos.t
   -> y:WindowPos.t
   -> width:int
   -> height:int
   -> flags:WindowFlags.t list
   -> Window.t
-  = "caml_SDL_CreateWindow2_bc" "caml_SDL_CreateWindow2"
+  = "caml_SDL_CreateWindow_bc" "caml_SDL_CreateWindow"
 
 external set_window_title
   :  window:Window.t

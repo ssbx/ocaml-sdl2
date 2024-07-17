@@ -136,32 +136,36 @@ caml_SDL_GetMousePos(value unit)
 CAMLprim value
 caml_SDL_WarpMouseInWindow(value window, value x, value y)
 {
+    CAMLparam3(window, x, y);
     SDL_WarpMouseInWindow(
             SDL_Window_val(window),
             Int_val(x), Int_val(y));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
-caml_SDL_SetRelativeMouseMode(SDL_bool enabled)
+caml_SDL_SetRelativeMouseMode(value enabled)
 {
+    CAMLparam1(enabled);
     int r = SDL_SetRelativeMouseMode(Bool_val(enabled));
     if (r != 0) caml_failwith("Sdlmouse.set_relative_mode");
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_ShowCursor(value toggle)
 {
+    CAMLparam1(toggle);
     int shown = SDL_ShowCursor(Int_val(toggle));
-    return Val_unit;
+    CAMLreturn(Val_unit);
 }
 
 CAMLprim value
 caml_SDL_ShowCursor_Query(value unit)
 {
+    CAMLparam1(unit);
     int shown = SDL_ShowCursor(-1);
-    return Val_bool(shown);
+    CAMLreturn(Val_bool(shown));
 }
 
 /* vim: set ts=4 sw=4 et: */
