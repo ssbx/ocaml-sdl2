@@ -154,28 +154,13 @@ caml_SDL_RenderSetClipRect(value renderer, value _rect)
 #define Uint8_val Int_val
 CAMLprim value
 caml_SDL_SetRenderDrawColor(
-        value renderer, value rgb, value a)
-{
-    CAMLparam3(renderer, rgb, a);
-    int s = SDL_SetRenderDrawColor(
-        SDL_Renderer_val(renderer),
-        Uint8_val(Field(rgb, 0)),
-        Uint8_val(Field(rgb, 1)),
-        Uint8_val(Field(rgb, 2)),
-        Uint8_val(a));
-    if (s) caml_failwith("Sdlrender.draw_color");
-    CAMLreturn(Val_unit);
-}
-
-CAMLprim value
-caml_SDL_SetRenderDrawColor3(
         value renderer, value r, value g, value b, value a)
 {
     CAMLparam5(renderer, r, g, b ,a);
     int s = SDL_SetRenderDrawColor(
         SDL_Renderer_val(renderer),
         Uint8_val(r), Uint8_val(g), Uint8_val(b), Uint8_val(a));
-    if (s) caml_failwith("Sdlrender.draw_color3");
+    if (s) caml_failwith("Sdlrender.draw_color");
     CAMLreturn(Val_unit);
 }
 #undef Uint8_val

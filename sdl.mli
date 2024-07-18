@@ -633,19 +633,12 @@ external render_set_clip_rect
 
 external set_render_draw_color
   :  Renderer.t
-  -> rgb:int * int * int
-  -> a:int
-  -> unit
-  = "caml_SDL_SetRenderDrawColor"
-
-external set_render_draw_color3
-  :  Renderer.t
   -> r:int
   -> g:int
   -> b:int
   -> a:int
   -> unit
-  = "caml_SDL_SetRenderDrawColor3"
+  = "caml_SDL_SetRenderDrawColor"
 
 external set_render_draw_blend_mode
   :  Renderer.t
