@@ -131,10 +131,7 @@ module Rect = struct
     ; h : int
     }
 
-  let make1 (x, y, w, h) = { x; y; w; h }
-  let make2 ~pos:(x, y) ~dims:(w, h) = { x; y; w; h }
-  let make4 ~x ~y ~w ~h = { x; y; w; h }
-  let make = make2
+  let make ~x ~y ~w ~h = { x; y; w; h }
 end
 
 module Point = struct
@@ -2556,21 +2553,19 @@ external render_fill_rects
 external render_copy
   :  Renderer.t
   -> texture:Texture.t
-  -> ?src_rect:Rect.t
-  -> ?dst_rect:Rect.t
-  -> unit
+  -> srcrect:Rect.t option
+  -> dstrect:Rect.t option
   -> unit
   = "caml_SDL_RenderCopy"
 
 external render_copyEx
   :  Renderer.t
   -> texture:Texture.t
-  -> ?src_rect:Rect.t
-  -> ?dst_rect:Rect.t
-  -> ?angle:float
-  -> ?center:int * int
-  -> ?flip:RendererFlip.t
-  -> unit
+  -> srcrect:Rect.t option
+  -> dstrect:Rect.t option
+  -> angle:float
+  -> center:Point.t option
+  -> flip:RendererFlip.t
   -> unit
   = "caml_SDL_RenderCopyEx_bc" "caml_SDL_RenderCopyEx"
 

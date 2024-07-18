@@ -172,10 +172,7 @@ module Rect : sig
     ; h : int
     }
 
-  val make1 : int * int * int * int -> t
-  val make2 : pos:int * int -> dims:int * int -> t
-  val make4 : x:int -> y:int -> w:int -> h:int -> t
-  val make : pos:int * int -> dims:int * int -> t
+  val make : x:int -> y:int -> w:int -> h:int -> t
 end
 
 module Point : sig
@@ -701,21 +698,19 @@ external render_fill_rects
 external render_copy
   :  Renderer.t
   -> texture:Texture.t
-  -> ?src_rect:Rect.t
-  -> ?dst_rect:Rect.t
-  -> unit
+  -> srcrect:Rect.t option
+  -> dstrect:Rect.t option
   -> unit
   = "caml_SDL_RenderCopy"
 
 external render_copyEx
   :  Renderer.t
   -> texture:Texture.t
-  -> ?src_rect:Rect.t
-  -> ?dst_rect:Rect.t
-  -> ?angle:float
-  -> ?center:int * int
-  -> ?flip:RendererFlip.t
-  -> unit
+  -> srcrect:Rect.t option
+  -> dstrect:Rect.t option
+  -> angle:float
+  -> center:Point.t option
+  -> flip:RendererFlip.t
   -> unit
   = "caml_SDL_RenderCopyEx_bc" "caml_SDL_RenderCopyEx"
 

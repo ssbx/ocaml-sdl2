@@ -349,28 +349,24 @@ CAMLprim value
 caml_SDL_RenderCopy(
         value renderer,
         value texture,
-        value _srcrect,
-        value _dstrect,
-        value unit)
+        value srcrect_opt,
+        value dstrect_opt)
 {
-    CAMLparam5(renderer, texture,_srcrect,_dstrect,unit);
+    CAMLparam4(renderer, texture, srcrect_opt, dstrect_opt);
+
     SDL_Rect srcrect;
     SDL_Rect dstrect;
 
-    SDL_Rect *srcrect_;
-    SDL_Rect *dstrect_;
+    SDL_Rect *srcrect_ = NULL;
+    SDL_Rect *dstrect_ = NULL;
 
-    if (_srcrect == Val_none) {
-        srcrect_ = NULL;
-    } else {
-        SDL_Rect_val(&srcrect, Some_val(_srcrect));
+    if (Is_some(srcrect_opt)) {
+        SDL_Rect_val(&srcrect, Some_val(srcrect_opt));
         srcrect_ = &srcrect;
     }
 
-    if (_dstrect == Val_none) {
-        dstrect_ = NULL;
-    } else {
-        SDL_Rect_val(&dstrect, Some_val(_dstrect));
+    if (Is_some(dstrect_opt)) {
+        SDL_Rect_val(&dstrect, Some_val(dstrect_opt));
         dstrect_ = &dstrect;
     }
 
@@ -390,59 +386,37 @@ CAMLprim value
 caml_SDL_RenderCopyEx(
         value renderer,
         value texture,
-        value _srcrect,
-        value _dstrect,
+        value srcrect_opt,
+        value dstrect_opt,
         value angle,
-        value _center,
-        value flip,
-        value unit)
+        value center_opt,
+        value flip)
 {
-    CAMLparam5(renderer, texture, _srcrect, _dstrect, angle);
-    CAMLxparam3(_center, flip, unit);
+    CAMLparam5(renderer, texture, srcrect_opt, dstrect_opt, angle);
+    CAMLxparam2(center_opt, flip);
+
     SDL_Rect srcrect;
-    SDL_Rect *srcrect_;
-
     SDL_Rect dstrect;
-    SDL_Rect *dstrect_;
-
     SDL_Point center;
-    SDL_Point *center_;
 
-    double angle_;
-    SDL_RendererFlip flip_;
+    SDL_Rect *srcrect_ = NULL;
+    SDL_Rect *dstrect_ = NULL;
+    SDL_Point *center_ = NULL;
 
-    if (_srcrect == Val_none) {
-        srcrect_ = NULL;
-    } else {
-        SDL_Rect_val(&srcrect, Some_val(_srcrect));
+    if (Is_some(srcrect_opt)) {
+        SDL_Rect_val(&srcrect, Some_val(srcrect_opt));
         srcrect_ = &srcrect;
     }
 
-    if (_dstrect == Val_none) {
-        dstrect_ = NULL;
-    } else {
-        SDL_Rect_val(&dstrect, Some_val(_dstrect));
+    if (Is_some(dstrect_opt)) {
+        SDL_Rect_val(&dstrect, Some_val(dstrect_opt));
         dstrect_ = &dstrect;
     }
 
-    if (_center == Val_none) {
-        center_ = NULL;
-    } else {
-        SDL_Point_val(&center, Some_val(_center));
+    if (Is_some(center_opt)) {
+        SDL_Point_val(&center, Some_val(center_opt));
         center_ = &center;
     }
-
-    angle_ =
-        (angle == Val_none
-        ? 0.0
-        : Double_val(Some_val(angle))
-        );
-
-    flip_ =
-        (flip == Val_none
-        ? SDL_FLIP_NONE
-        : SDL_RendererFlip_val(Some_val(flip))
-        );
 
     int r =
         SDL_RenderCopyEx(
@@ -450,9 +424,9 @@ caml_SDL_RenderCopyEx(
                 SDL_Texture_val(texture),
                 srcrect_,
                 dstrect_,
-                angle_,
+                Double_val(angle),
                 center_,
-                flip_);
+                SDL_RendererFlip_val(flip));
 
     if (r)
         caml_failwith("Sdlrender.copyEx");
@@ -465,7 +439,7 @@ caml_SDL_RenderCopyEx_bc(value * argv, int argn)
 {
     return caml_SDL_RenderCopyEx(
         argv[0], argv[1], argv[2], argv[3],
-        argv[4], argv[5], argv[6], argv[7]);
+        argv[4], argv[5], argv[6]);
 }
 
 CAMLprim value
