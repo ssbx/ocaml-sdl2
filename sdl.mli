@@ -616,6 +616,8 @@ external create_renderer
   -> Renderer.t
   = "caml_SDL_CreateRenderer"
 
+external destroy_renderer : Renderer.t -> unit = "caml_SDL_DestroyRenderer"
+
 external render_set_logical_size
   :  Renderer.t
   -> width:int

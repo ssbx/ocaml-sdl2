@@ -114,6 +114,14 @@ caml_SDL_CreateRenderer(value window, value index, value _flags)
 }
 
 CAMLprim value
+caml_SDL_DestroyRenderer(value renderer)
+{
+    CAMLparam1(renderer);
+    SDL_DestroyRenderer(SDL_Renderer_val(renderer));
+    CAMLreturn(Val_unit);
+}
+
+CAMLprim value
 caml_SDL_RenderSetLogicalSize(value renderer, value w, value h)
 {
     CAMLparam3(renderer, w, h);
