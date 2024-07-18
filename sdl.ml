@@ -2598,6 +2598,9 @@ external render_create_texture
   = "caml_SDL_CreateTexture"
 
 external destroy_texture : Texture.t -> unit = "caml_SDL_DestroyTexture"
+external query_texture
+  :  Texture.t
+  -> (PixelFormat.t * TextureAccess.t * int * int) = "caml_SDL_QueryTexture"
 
 external set_renderer_target
   :  Renderer.t

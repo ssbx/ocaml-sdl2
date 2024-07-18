@@ -556,6 +556,24 @@ caml_SDL_CreateTexture(
 }
 
 CAMLprim value
+caml_SDL_QueryTexture(value texture)
+{
+    CAMLparam1(texture);
+    CAMLlocal1(ret);
+    Uint32 format;
+    int access, w, h, r;
+    r = SDL_QueryTexture(SDL_Texture_val(texture), &format, &access, &w, &h);
+    if (r != 0)
+        caml_failwith("Sdlrender.create_texture");
+    ret = caml_alloc(4, 0);
+    Store_field(ret, 0, Val_Sdl_pixelformat_t(format));
+    Store_field(ret, 1, Val_Sdl_textureaccess_t(access));
+    Store_field(ret, 2, Val_int(w));
+    Store_field(ret, 3, Val_int(h));
+    CAMLreturn(ret);
+}
+
+CAMLprim value
 caml_SDL_SetRenderTarget(
         value renderer,
         value texture_option)
