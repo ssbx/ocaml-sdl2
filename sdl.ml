@@ -2602,7 +2602,7 @@ external query_texture
   :  Texture.t
   -> (PixelFormat.t * TextureAccess.t * int * int) = "caml_SDL_QueryTexture"
 
-external set_renderer_target
+external set_render_target
   :  Renderer.t
   -> Texture.t option
   -> unit
