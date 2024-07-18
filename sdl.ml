@@ -2590,10 +2590,10 @@ external render_read_pixels
 
 external render_create_texture
   :  Renderer.t
-  -> PixelFormat.t
-  -> TextureAccess.t
-  -> int
-  -> int
+  -> fmt:PixelFormat.t
+  -> access:TextureAccess.t
+  -> width:int
+  -> height:int
   -> Texture.t
   = "caml_SDL_CreateTexture"
 
