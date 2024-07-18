@@ -1,4 +1,4 @@
-.PHONY: build test t clean dev_remove dev_install doc fmt
+.PHONY: build clean test fmt doc dev_update
 
 build:
 	dune build
@@ -16,8 +16,5 @@ fmt:
 doc:
 	dune build @doc && $(BROWSER) _build/default/_doc/_html/caml-libsdl2/Sdl/index.html
 
-dev_remove:
-	opam remove caml-libsdl2
-
-dev_install: dev_remove clean build
+dev_update:
 	opam install -v --working-dir ./caml-libsdl2.opam

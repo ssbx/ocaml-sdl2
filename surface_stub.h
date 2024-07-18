@@ -1,6 +1,8 @@
 #ifndef _CAML_SDL_SURFACE_
 #define _CAML_SDL_SURFACE_
 
+#include <SDL_surface.h>
+
 static value Val_SDL_Surface(SDL_Surface * p)
 {
     return caml_copy_nativeint((intnat) p);

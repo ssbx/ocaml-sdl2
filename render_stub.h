@@ -1,6 +1,8 @@
 #ifndef _CAML_SDL_RENDERER_
 #define _CAML_SDL_RENDERER_
 
+#include <SDL_render.h>
+
 /* SDL_Renderer val */
 static value Val_SDL_Renderer(SDL_Renderer * p)
 {

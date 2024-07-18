@@ -1,6 +1,8 @@
 #ifndef _CAML_SDL_VIDEO_
 #define _CAML_SDL_VIDEO_
 
+#include <SDL_video.h>
+
 /* SDL_Window */
 static value Val_SDL_Window(SDL_Window * p)
 {
@@ -28,3 +30,5 @@ static SDL_GLContext SDL_GLContext_val(value v)
 }
 
 #endif /* _CAML_SDL_VIDEO_ */
+
+/* vim: set ts=4 sw=4 et: */

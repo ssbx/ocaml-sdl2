@@ -1,6 +1,8 @@
 #ifndef _CAML_SDL_RECT_
 #define _CAML_SDL_RECT_
 
+#include <SDL_rect.h>
+
 #define SDL_Rect_val(r, v) \
     (r)->x = Int_val(Field(v, 0)); \
     (r)->y = Int_val(Field(v, 1)); \
