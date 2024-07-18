@@ -16,10 +16,11 @@
 #include <caml/bigarray.h>
 
 #include <SDL_surface.h>
-#include "surface_stub.h"
-#include "rect_stub.h"
-#include "blendmode_stub.h"
-#include "pixel_stub.h"
+
+#include "caml_libsdl2/surface_stub.h"
+#include "caml_libsdl2/rect_stub.h"
+#include "caml_libsdl2/blendmode_stub.h"
+#include "caml_libsdl2/pixel_stub.h"
 
 #include <string.h>
 

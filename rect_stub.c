@@ -15,7 +15,7 @@
 #include <caml/fail.h>
 
 #include <SDL_rect.h>
-#include "rect_stub.h"
+#include "caml_libsdl2/rect_stub.h"
 
 CAMLprim value
 caml_SDL_HasIntersection(value a, value b)

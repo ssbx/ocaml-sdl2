@@ -16,16 +16,7 @@
  (public_name caml-libsdl2)
  (name sdl)
  (modes native)
- (install_c_headers
-   audio_stub
-   blendmode_stub
-   keycode_stub
-   pixel_stub
-   rect_stub
-   render_stub
-   rwops_stub
-   surface_stub
-   video_stub)
+ (public_headers (glob_files caml_libsdl2/*.h))
  (foreign_stubs
   (language c)
   (names
