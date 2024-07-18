@@ -1,3 +1,9 @@
+
+type uint8 = int
+type uint16 = int
+type uint32 = int32
+type uint64 = int64
+
 module Subsystem = struct
   type t =
     [ `SDL_INIT_TIMER
@@ -151,6 +157,15 @@ external intersect_rect_and_line
 
 external point_in_rect : p:Point.t -> r:Rect.t -> bool = "caml_SDL_PointInRect"
 
+module Color = struct
+  type t =
+    { r : uint8
+    ; g : uint8
+    ; b : uint8
+    ; a : uint8
+    }
+  let make ~r ~g ~b ~a = {r; g; b; a}
+end
 module PixelFormat = struct
   type t =
     | Unknown
@@ -349,7 +364,6 @@ external get_pixel_format_name : PixelFormat.t -> string = "caml_SDL_GetPixelFor
 external alloc_format : PixelFormat.t -> PixelFormat.allocated = "caml_SDL_AllocFormat"
 external free_format : PixelFormat.allocated -> unit = "caml_SDL_FreeFormat"
 
-type uint8 = int
 type rgb = uint8 * uint8 * uint8
 type rgba = uint8 * uint8 * uint8 * uint8
 
@@ -2035,10 +2049,6 @@ external delay : ms:int -> unit = "caml_SDL_Delay"
 
 module RWops = struct
   type t
-  type uint8 = int
-  type uint16 = int
-  type uint32 = int32
-  type uint64 = int64
 
   type input =
     [ `Filename of string (* provide the input by its filename *)
@@ -2061,20 +2071,20 @@ external close_rw : RWops.t -> unit = "caml_SDL_CloseRW"
 external rw_size : RWops.t -> int64 = "caml_SDL_RWsize"
 external rw_seek : RWops.t -> offset:int64 -> RWops.seek -> int64 = "caml_SDL_RWseek"
 external rw_tell : RWops.t -> int64 = "caml_SDL_RWtell"
-external read_U8 : RWops.t -> RWops.uint8 = "caml_SDL_ReadU8"
-external write_U8 : RWops.t -> RWops.uint8 -> unit = "caml_SDL_WriteU8"
-external read_be16 : RWops.t -> RWops.uint16 = "caml_SDL_ReadBE16"
-external read_be32 : RWops.t -> RWops.uint32 = "caml_SDL_ReadBE32"
-external read_be64 : RWops.t -> RWops.uint64 = "caml_SDL_ReadBE64"
-external write_be16 : RWops.t -> RWops.uint16 -> unit = "caml_SDL_WriteBE16"
-external write_be32 : RWops.t -> RWops.uint32 -> unit = "caml_SDL_WriteBE32"
-external write_be64 : RWops.t -> RWops.uint64 -> unit = "caml_SDL_WriteBE64"
-external read_le16 : RWops.t -> RWops.uint16 = "caml_SDL_ReadLE16"
-external read_le32 : RWops.t -> RWops.uint32 = "caml_SDL_ReadLE32"
-external read_le64 : RWops.t -> RWops.uint64 = "caml_SDL_ReadLE64"
-external write_le16 : RWops.t -> RWops.uint16 -> unit = "caml_SDL_WriteLE16"
-external write_le32 : RWops.t -> RWops.uint32 -> unit = "caml_SDL_WriteLE32"
-external write_le64 : RWops.t -> RWops.uint64 -> unit = "caml_SDL_WriteLE64"
+external read_U8 : RWops.t -> uint8 = "caml_SDL_ReadU8"
+external write_U8 : RWops.t -> uint8 -> unit = "caml_SDL_WriteU8"
+external read_be16 : RWops.t -> uint16 = "caml_SDL_ReadBE16"
+external read_be32 : RWops.t -> uint32 = "caml_SDL_ReadBE32"
+external read_be64 : RWops.t -> uint64 = "caml_SDL_ReadBE64"
+external write_be16 : RWops.t -> uint16 -> unit = "caml_SDL_WriteBE16"
+external write_be32 : RWops.t -> uint32 -> unit = "caml_SDL_WriteBE32"
+external write_be64 : RWops.t -> uint64 -> unit = "caml_SDL_WriteBE64"
+external read_le16 : RWops.t -> uint16 = "caml_SDL_ReadLE16"
+external read_le32 : RWops.t -> uint32 = "caml_SDL_ReadLE32"
+external read_le64 : RWops.t -> uint64 = "caml_SDL_ReadLE64"
+external write_le16 : RWops.t -> uint16 -> unit = "caml_SDL_WriteLE16"
+external write_le32 : RWops.t -> uint32 -> unit = "caml_SDL_WriteLE32"
+external write_le64 : RWops.t -> uint64 -> unit = "caml_SDL_WriteLE64"
 
 let from_input = function
   | `Filename filename -> rw_from_file ~filename ~mode:"r"
