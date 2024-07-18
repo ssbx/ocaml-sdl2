@@ -13,10 +13,10 @@
     (system "echo -n '('; pkg-config --libs sdl2; echo -n ')'"))))
 
 (library
- (public_name caml-libsdl2)
- (name sdl)
+ (public_name caml-sdl2)
+ (name camlSDL2)
  (modes native)
- (public_headers (glob_files caml_libsdl2/*.h))
+ (public_headers (glob_files camlsdl2/*.h))
  (foreign_stubs
   (language c)
   (names

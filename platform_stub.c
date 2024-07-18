@@ -4,6 +4,7 @@
 #include <caml/memory.h>
 
 #include <SDL_platform.h>
+
 CAMLprim value
 caml_SDL_GetPlatform(value unit)
 {

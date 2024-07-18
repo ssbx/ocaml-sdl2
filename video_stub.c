@@ -15,9 +15,9 @@
 #include <caml/fail.h>
 
 #include <SDL_video.h>
-#include "caml_libsdl2/video_stub.h"
-#include "caml_libsdl2/surface_stub.h"
-#include "caml_libsdl2/rect_stub.h"
+#include "camlsdl2/video_stub.h"
+#include "camlsdl2/surface_stub.h"
+#include "camlsdl2/rect_stub.h"
 
 static const Uint32 caml_sdl_windowflags_table[] = {
     SDL_WINDOW_FULLSCREEN,

@@ -16,12 +16,12 @@
 
 #include <SDL_render.h>
 
-#include "caml_libsdl2/render_stub.h"
-#include "caml_libsdl2/video_stub.h"
-#include "caml_libsdl2/surface_stub.h"
-#include "caml_libsdl2/rect_stub.h"
-#include "caml_libsdl2/blendmode_stub.h"
-#include "caml_libsdl2/pixel_stub.h"
+#include "camlsdl2/render_stub.h"
+#include "camlsdl2/video_stub.h"
+#include "camlsdl2/surface_stub.h"
+#include "camlsdl2/rect_stub.h"
+#include "camlsdl2/blendmode_stub.h"
+#include "camlsdl2/pixel_stub.h"
 
 const int caml_sdl_textureaccess_table[] = {
     SDL_TEXTUREACCESS_STATIC,

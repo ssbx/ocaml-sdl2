@@ -15,7 +15,7 @@
 #include <caml/fail.h>
 
 #include <SDL_audio.h>
-#include "caml_libsdl2/audio_stub.h"
+#include "camlsdl2/audio_stub.h"
 
 const SDL_AudioFormat ocaml_SDL_AudioFormat_table[] = {
     AUDIO_U8,

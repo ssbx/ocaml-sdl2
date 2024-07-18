@@ -17,10 +17,10 @@
 
 #include <SDL_surface.h>
 
-#include "caml_libsdl2/surface_stub.h"
-#include "caml_libsdl2/rect_stub.h"
-#include "caml_libsdl2/blendmode_stub.h"
-#include "caml_libsdl2/pixel_stub.h"
+#include "camlsdl2/surface_stub.h"
+#include "camlsdl2/rect_stub.h"
+#include "camlsdl2/blendmode_stub.h"
+#include "camlsdl2/pixel_stub.h"
 
 #include <string.h>
 

@@ -15,7 +15,7 @@
 #include <caml/fail.h>
 
 #include <SDL_mouse.h>
-#include "caml_libsdl2/video_stub.h"
+#include "camlsdl2/video_stub.h"
 
 #define SDL_BUTTON_X3       (SDL_BUTTON_X2+1)
 #define SDL_BUTTON_X4       (SDL_BUTTON_X2+2)

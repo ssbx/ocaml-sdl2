@@ -18,7 +18,7 @@
 #include <SDL_keyboard.h>
 #include <SDL_keycode.h>
 #include <SDL_scancode.h>
-#include "caml_libsdl2/keycode_stub.h"
+#include "camlsdl2/keycode_stub.h"
 
 
 #if 0
