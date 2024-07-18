@@ -19,7 +19,7 @@
 CAMLprim value
 caml_SDL_GetError(value unit)
 {
-    CAMLparam0();
+    CAMLparam1(unit);
     const char *err = SDL_GetError();
     CAMLreturn(caml_copy_string(err));
 }
@@ -27,9 +27,18 @@ caml_SDL_GetError(value unit)
 CAMLprim value
 caml_SDL_ClearError(value unit)
 {
-    CAMLparam0();
+    CAMLparam1(unit);
     SDL_ClearError();
     CAMLreturn(Val_unit);
 }
+
+CAMLprim value
+caml_SDL_SetError(value str)
+{
+    CAMLparam1(str);
+    SDL_SetError((const char*) String_val(str));
+    CAMLreturn(Val_unit);
+}
+
 
 /* vim: set ts=4 sw=4 et: */
