@@ -2588,7 +2588,7 @@ external render_read_pixels
   -> unit
   = "caml_SDL_RenderReadPixels"
 
-external render_create_texture
+external create_texture
   :  Renderer.t
   -> fmt:PixelFormat.t
   -> access:TextureAccess.t
