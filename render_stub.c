@@ -114,22 +114,7 @@ caml_SDL_CreateRenderer(value window, value index, value _flags)
 }
 
 CAMLprim value
-caml_SDL_RenderSetLogicalSize(value renderer, value dims)
-{
-    CAMLparam2(renderer, dims);
-
-    value w = Field(dims,0);
-    value h = Field(dims,1);
-    int r = SDL_RenderSetLogicalSize(
-                SDL_Renderer_val(renderer),
-                Int_val(w), Int_val(h));
-    if (r) caml_failwith("Sdlrender.set_logical_size");
-
-    CAMLreturn(Val_unit);
-}
-
-CAMLprim value
-caml_SDL_RenderSetLogicalSize2(value renderer, value w, value h)
+caml_SDL_RenderSetLogicalSize(value renderer, value w, value h)
 {
     CAMLparam3(renderer, w, h);
     int r = SDL_RenderSetLogicalSize(
