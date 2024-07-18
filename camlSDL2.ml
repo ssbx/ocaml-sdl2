@@ -1,1 +1,1 @@
-module SDL = Sdl
+module Sdl = Sdl
