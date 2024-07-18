@@ -2587,7 +2587,8 @@ external render_copyEx
 
 external render_set_scale
   :  Renderer.t
-  -> float * float
+  -> scaleX:float
+  -> scaleY:float
   -> unit
   = "caml_SDL_RenderSetScale"
 

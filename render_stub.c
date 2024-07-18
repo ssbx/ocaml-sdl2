@@ -491,14 +491,15 @@ caml_SDL_RenderCopyEx_bc(value * argv, int argn)
 }
 
 CAMLprim value
-caml_SDL_RenderSetScale(value renderer, value scale)
+caml_SDL_RenderSetScale(value renderer, value scaleX, value scaleY)
 {
-    CAMLparam2(renderer, scale);
+    CAMLparam3(renderer, scaleX, scaleY);
     int r = SDL_RenderSetScale(
                 SDL_Renderer_val(renderer),
-                Double_val(Field(scale,0)),
-                Double_val(Field(scale,1)));
-    if (r) caml_failwith("Sdlrender.set_scale");
+                Double_val(scaleX),
+                Double_val(scaleY));
+    if (r)
+        caml_failwith("Sdlrender.set_scale");
     CAMLreturn(Val_unit);
 }
 
