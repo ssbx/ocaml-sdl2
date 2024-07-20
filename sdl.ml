@@ -371,26 +371,26 @@ external get_RGBA : pixel:int32 -> fmt:PixelFormat.allocated -> rgba = "caml_SDL
 
 module BlendMode = struct
   type t =
-    | SDL_BLENDMODE_NONE
-    | SDL_BLENDMODE_BLEND
-    | SDL_BLENDMODE_ADD
-    | SDL_BLENDMODE_MOD
-    | SDL_BLENDMODE_MUL
+    | NONE
+    | BLEND
+    | ADD
+    | MOD
+    | MUL
 
   let to_string = function
-    | SDL_BLENDMODE_NONE -> "SDL_BLENDMODE_NONE"
-    | SDL_BLENDMODE_BLEND -> "SDL_BLENDMODE_BLEND"
-    | SDL_BLENDMODE_ADD -> "SDL_BLENDMODE_ADD"
-    | SDL_BLENDMODE_MOD -> "SDL_BLENDMODE_MOD"
-    | SDL_BLENDMODE_MUL -> "SDL_BLENDMODE_MUL"
+    | NONE -> "NONE"
+    | BLEND -> "BLEND"
+    | ADD -> "ADD"
+    | MOD -> "MOD"
+    | MUL -> "MUL"
   ;;
 
   let of_string = function
-    | "SDL_BLENDMODE_NONE" -> SDL_BLENDMODE_NONE
-    | "SDL_BLENDMODE_BLEND" -> SDL_BLENDMODE_BLEND
-    | "SDL_BLENDMODE_ADD" -> SDL_BLENDMODE_ADD
-    | "SDL_BLENDMODE_MOD" -> SDL_BLENDMODE_MOD
-    | "SDL_BLENDMODE_MUL" -> SDL_BLENDMODE_MUL
+    | "NONE" -> NONE
+    | "BLEND" -> BLEND
+    | "ADD" -> ADD
+    | "MOD" -> MOD
+    | "MUL" -> MUL
     | invalid -> invalid_arg (Printf.sprintf "BlendMode.t %s" invalid)
   ;;
 end

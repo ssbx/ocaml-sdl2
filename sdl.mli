@@ -269,11 +269,11 @@ external get_RGBA : pixel:int32 -> fmt:PixelFormat.allocated -> rgba = "caml_SDL
 
 module BlendMode : sig
   type t =
-    | SDL_BLENDMODE_NONE
-    | SDL_BLENDMODE_BLEND
-    | SDL_BLENDMODE_ADD
-    | SDL_BLENDMODE_MOD
-    | SDL_BLENDMODE_MUL
+    | NONE
+    | BLEND
+    | ADD
+    | MOD
+    | MUL
 
   val to_string : t -> string
   val of_string : string -> t
