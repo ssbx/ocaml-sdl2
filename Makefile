@@ -1,7 +1,4 @@
-.PHONY: build clean test fmt doc dev_update rel
-
-rel: clean 
-	dune-release check
+.PHONY: build clean test fmt doc dev_update release
 
 build:
 	dune build
@@ -21,3 +18,11 @@ doc:
 
 dev_update: clean
 	opam install -v --working-dir ./caml-sdl2.opam
+
+release: clean 
+	dune-release tag
+	dune-release lint
+	dune-release check
+	dune-release distrib
+	dune-release opam pkg
+
