@@ -16,5 +16,5 @@ fmt:
 doc:
 	dune build @doc && $(BROWSER) _build/default/_doc/_html/caml-sdl2/CamlSDL2/Sdl/index.html
 
-dev_update:
+dev_update: clean
 	opam install -v --working-dir ./caml-sdl2.opam

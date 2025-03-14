@@ -27,15 +27,15 @@ int main(int argc, char *argv[])
 static inline Uint32
 sdlinit_val(value v)
 {
-  if (v == caml_hash_variant("SDL_INIT_TIMER"))          return SDL_INIT_TIMER;
-  if (v == caml_hash_variant("SDL_INIT_AUDIO"))          return SDL_INIT_AUDIO;
-  if (v == caml_hash_variant("SDL_INIT_VIDEO"))          return SDL_INIT_VIDEO;
-  if (v == caml_hash_variant("SDL_INIT_JOYSTICK"))       return SDL_INIT_JOYSTICK;
-  if (v == caml_hash_variant("SDL_INIT_HAPTIC"))         return SDL_INIT_HAPTIC;
-  if (v == caml_hash_variant("SDL_INIT_GAMECONTROLLER")) return SDL_INIT_GAMECONTROLLER;
-  if (v == caml_hash_variant("SDL_INIT_EVENTS"))         return SDL_INIT_EVENTS;
-  if (v == caml_hash_variant("SDL_INIT_EVERYTHING"))     return SDL_INIT_EVERYTHING;
-  if (v == caml_hash_variant("SDL_INIT_NOPARACHUTE"))    return SDL_INIT_NOPARACHUTE;
+  if (v == caml_hash_variant("TIMER"))          return SDL_INIT_TIMER;
+  if (v == caml_hash_variant("AUDIO"))          return SDL_INIT_AUDIO;
+  if (v == caml_hash_variant("VIDEO"))          return SDL_INIT_VIDEO;
+  if (v == caml_hash_variant("JOYSTICK"))       return SDL_INIT_JOYSTICK;
+  if (v == caml_hash_variant("HAPTIC"))         return SDL_INIT_HAPTIC;
+  if (v == caml_hash_variant("GAMECONTROLLER")) return SDL_INIT_GAMECONTROLLER;
+  if (v == caml_hash_variant("EVENTS"))         return SDL_INIT_EVENTS;
+  if (v == caml_hash_variant("EVERYTHING"))     return SDL_INIT_EVERYTHING;
+  if (v == caml_hash_variant("NOPARACHUTE"))    return SDL_INIT_NOPARACHUTE;
   return 0x00000000;
 }
 

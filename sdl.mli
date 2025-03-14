@@ -12,15 +12,15 @@ type uint64 = int64
 
 module Subsystem : sig
   type t =
-    [ `SDL_INIT_AUDIO
-    | `SDL_INIT_EVENTS
-    | `SDL_INIT_EVERYTHING
-    | `SDL_INIT_GAMECONTROLLER
-    | `SDL_INIT_HAPTIC
-    | `SDL_INIT_JOYSTICK
-    | `SDL_INIT_NOPARACHUTE
-    | `SDL_INIT_TIMER
-    | `SDL_INIT_VIDEO
+    [ `AUDIO
+    | `EVENTS
+    | `EVERYTHING
+    | `GAMECONTROLLER
+    | `HAPTIC
+    | `JOYSTICK
+    | `NOPARACHUTE
+    | `TIMER
+    | `VIDEO
     ]
 end
 
@@ -444,23 +444,23 @@ end
 
 module WindowEventID : sig
   type t =
-    | SDL_WINDOWEVENT_NONE
-    | SDL_WINDOWEVENT_SHOWN
-    | SDL_WINDOWEVENT_HIDDEN
-    | SDL_WINDOWEVENT_EXPOSED
-    | SDL_WINDOWEVENT_MOVED of Point.t
-    | SDL_WINDOWEVENT_RESIZED of Point.t
-    | SDL_WINDOWEVENT_SIZE_CHANGED of Point.t
-    | SDL_WINDOWEVENT_MINIMIZED
-    | SDL_WINDOWEVENT_MAXIMIZED
-    | SDL_WINDOWEVENT_RESTORED
-    | SDL_WINDOWEVENT_ENTER
-    | SDL_WINDOWEVENT_LEAVE
-    | SDL_WINDOWEVENT_FOCUS_GAINED
-    | SDL_WINDOWEVENT_FOCUS_LOST
-    | SDL_WINDOWEVENT_CLOSE
-    | SDL_WINDOWEVENT_TAKE_FOCUS
-    | SDL_WINDOWEVENT_HIT_TEST
+    | NONE
+    | SHOWN
+    | HIDDEN
+    | EXPOSED
+    | MOVED of Point.t
+    | RESIZED of Point.t
+    | SIZE_CHANGED of Point.t
+    | MINIMIZED
+    | MAXIMIZED
+    | RESTORED
+    | ENTER
+    | LEAVE
+    | FOCUS_GAINED
+    | FOCUS_LOST
+    | CLOSE
+    | TAKE_FOCUS
+    | HIT_TEST
 
   val string_of_id : t -> string
 end
@@ -857,11 +857,11 @@ end
 
 module PowerState : sig
   type t =
-    [ `powerstate_Charged
-    | `powerstate_Charging
-    | `powerstate_No_Battery
-    | `powerstate_On_Battery
-    | `powerstate_Unknown
+    [ `Charged
+    | `Charging
+    | `No_Battery
+    | `On_Battery
+    | `Unknown
     ]
 end
 
@@ -969,14 +969,14 @@ external joystick_get_button
 
 module MouseButton : sig
   type t =
-    | Button_Left
-    | Button_Middle
-    | Button_Right
-    | Button_X1
-    | Button_X2
-    | Button_X3
-    | Button_X4
-    | Button_X5
+    | Left
+    | Middle
+    | Right
+    | X1
+    | X2
+    | X3
+    | X4
+    | X5
 
   val to_string : t -> string
   val of_string : string -> t

@@ -6,15 +6,15 @@ type uint64 = int64
 
 module Subsystem = struct
   type t =
-    [ `SDL_INIT_TIMER
-    | `SDL_INIT_AUDIO
-    | `SDL_INIT_VIDEO
-    | `SDL_INIT_JOYSTICK
-    | `SDL_INIT_HAPTIC
-    | `SDL_INIT_GAMECONTROLLER
-    | `SDL_INIT_EVENTS
-    | `SDL_INIT_EVERYTHING
-    | `SDL_INIT_NOPARACHUTE
+    [ `TIMER
+    | `AUDIO
+    | `VIDEO
+    | `JOYSTICK
+    | `HAPTIC
+    | `GAMECONTROLLER
+    | `EVENTS
+    | `EVERYTHING
+    | `NOPARACHUTE
     ]
 end
 
@@ -378,19 +378,19 @@ module BlendMode = struct
     | MUL
 
   let to_string = function
-    | NONE -> "NONE"
-    | BLEND -> "BLEND"
-    | ADD -> "ADD"
-    | MOD -> "MOD"
-    | MUL -> "MUL"
+    | NONE -> "SDL_BLENDMODE_NONE"
+    | BLEND -> "SDL_BLENDMODE_BLEND"
+    | ADD -> "SDL_BLENDMODE_ADD"
+    | MOD -> "SDL_BLENDMODE_MOD"
+    | MUL -> "SDL_BLENDMODE_MUL"
   ;;
 
   let of_string = function
-    | "NONE" -> NONE
-    | "BLEND" -> BLEND
-    | "ADD" -> ADD
-    | "MOD" -> MOD
-    | "MUL" -> MUL
+    | "SDL_BLENDMODE_NONE" -> NONE
+    | "SDL_BLENDMODE_BLEND" -> BLEND
+    | "SDL_BLENDMODE_ADD" -> ADD
+    | "SDL_BLENDMODE_MOD" -> MOD
+    | "SDL_BLENDMODE_MUL" -> MUL
     | invalid -> invalid_arg (Printf.sprintf "BlendMode.t %s" invalid)
   ;;
 end
@@ -2019,11 +2019,11 @@ external get_platform : unit -> string = "caml_SDL_GetPlatform"
 
 module PowerState = struct
   type t =
-    [ `powerstate_Unknown (** cannot determine power status *)
-    | `powerstate_On_Battery (** Not plugged in, running on the battery *)
-    | `powerstate_No_Battery (** Plugged in, no battery available *)
-    | `powerstate_Charging (** Plugged in, charging battery *)
-    | `powerstate_Charged (** Plugged in, battery charged *)
+    [ `Unknown (** cannot determine power status *)
+    | `On_Battery (** Not plugged in, running on the battery *)
+    | `No_Battery (** Plugged in, no battery available *)
+    | `Charging (** Plugged in, charging battery *)
+    | `Charged (** Plugged in, battery charged *)
     ]
 end
 
@@ -2227,43 +2227,43 @@ external create_rgb_surface_from
 
 module WindowEventID = struct
   type t =
-    | SDL_WINDOWEVENT_NONE
-    | SDL_WINDOWEVENT_SHOWN
-    | SDL_WINDOWEVENT_HIDDEN
-    | SDL_WINDOWEVENT_EXPOSED
-    | SDL_WINDOWEVENT_MOVED of Point.t
-    | SDL_WINDOWEVENT_RESIZED of Point.t
-    | SDL_WINDOWEVENT_SIZE_CHANGED of Point.t
-    | SDL_WINDOWEVENT_MINIMIZED
-    | SDL_WINDOWEVENT_MAXIMIZED
-    | SDL_WINDOWEVENT_RESTORED
-    | SDL_WINDOWEVENT_ENTER
-    | SDL_WINDOWEVENT_LEAVE
-    | SDL_WINDOWEVENT_FOCUS_GAINED
-    | SDL_WINDOWEVENT_FOCUS_LOST
-    | SDL_WINDOWEVENT_CLOSE
-    | SDL_WINDOWEVENT_TAKE_FOCUS
-    | SDL_WINDOWEVENT_HIT_TEST
+    | NONE
+    | SHOWN
+    | HIDDEN
+    | EXPOSED
+    | MOVED of Point.t
+    | RESIZED of Point.t
+    | SIZE_CHANGED of Point.t
+    | MINIMIZED
+    | MAXIMIZED
+    | RESTORED
+    | ENTER
+    | LEAVE
+    | FOCUS_GAINED
+    | FOCUS_LOST
+    | CLOSE
+    | TAKE_FOCUS
+    | HIT_TEST
 
   let string_of_id = function
-    | SDL_WINDOWEVENT_NONE -> "SDL_WINDOWEVENT_NONE"
-    | SDL_WINDOWEVENT_SHOWN -> "SDL_WINDOWEVENT_SHOWN"
-    | SDL_WINDOWEVENT_HIDDEN -> "SDL_WINDOWEVENT_HIDDEN"
-    | SDL_WINDOWEVENT_EXPOSED -> "SDL_WINDOWEVENT_EXPOSED"
-    | SDL_WINDOWEVENT_MINIMIZED -> "SDL_WINDOWEVENT_MINIMIZED"
-    | SDL_WINDOWEVENT_MAXIMIZED -> "SDL_WINDOWEVENT_MAXIMIZED"
-    | SDL_WINDOWEVENT_RESTORED -> "SDL_WINDOWEVENT_RESTORED"
-    | SDL_WINDOWEVENT_ENTER -> "SDL_WINDOWEVENT_ENTER"
-    | SDL_WINDOWEVENT_LEAVE -> "SDL_WINDOWEVENT_LEAVE"
-    | SDL_WINDOWEVENT_FOCUS_GAINED -> "SDL_WINDOWEVENT_FOCUS_GAINED"
-    | SDL_WINDOWEVENT_FOCUS_LOST -> "SDL_WINDOWEVENT_FOCUS_LOST"
-    | SDL_WINDOWEVENT_CLOSE -> "SDL_WINDOWEVENT_CLOSE"
-    | SDL_WINDOWEVENT_TAKE_FOCUS -> "SDL_WINDOWEVENT_TAKE_FOCUS"
-    | SDL_WINDOWEVENT_HIT_TEST -> "SDL_WINDOWEVENT_HIT_TEST"
-    | SDL_WINDOWEVENT_MOVED p -> Printf.sprintf "SDL_WINDOWEVENT_MOVED(%d, %d)" p.x p.y
-    | SDL_WINDOWEVENT_RESIZED p ->
+    | NONE -> "SDL_WINDOWEVENT_NONE"
+    | SHOWN -> "SDL_WINDOWEVENT_SHOWN"
+    | HIDDEN -> "SDL_WINDOWEVENT_HIDDEN"
+    | EXPOSED -> "SDL_WINDOWEVENT_EXPOSED"
+    | MINIMIZED -> "SDL_WINDOWEVENT_MINIMIZED"
+    | MAXIMIZED -> "SDL_WINDOWEVENT_MAXIMIZED"
+    | RESTORED -> "SDL_WINDOWEVENT_RESTORED"
+    | ENTER -> "SDL_WINDOWEVENT_ENTER"
+    | LEAVE -> "SDL_WINDOWEVENT_LEAVE"
+    | FOCUS_GAINED -> "SDL_WINDOWEVENT_FOCUS_GAINED"
+    | FOCUS_LOST -> "SDL_WINDOWEVENT_FOCUS_LOST"
+    | CLOSE -> "SDL_WINDOWEVENT_CLOSE"
+    | TAKE_FOCUS -> "SDL_WINDOWEVENT_TAKE_FOCUS"
+    | HIT_TEST -> "SDL_WINDOWEVENT_HIT_TEST"
+    | MOVED p -> Printf.sprintf "SDL_WINDOWEVENT_MOVED(%d, %d)" p.x p.y
+    | RESIZED p ->
       Printf.sprintf "SDL_WINDOWEVENT_RESIZED(%d, %d)" p.x p.y
-    | SDL_WINDOWEVENT_SIZE_CHANGED p ->
+    | SIZE_CHANGED p ->
       Printf.sprintf "SDL_WINDOWEVENT_SIZE_CHANGED(%d, %d)" p.x p.y
   ;;
 end
@@ -2897,36 +2897,36 @@ external poll_event : unit -> Event.t option = "caml_SDL_PollEvent"
 
 module MouseButton = struct
   type t =
-    | Button_Left
-    | Button_Middle
-    | Button_Right
-    | Button_X1
-    | Button_X2
-    | Button_X3
-    | Button_X4
-    | Button_X5
+    | Left
+    | Middle
+    | Right
+    | X1
+    | X2
+    | X3
+    | X4
+    | X5
 
   let to_string = function
-    | Button_Left -> "Button_Left"
-    | Button_Middle -> "Button_Middle"
-    | Button_Right -> "Button_Right"
-    | Button_X1 -> "Button_X1"
-    | Button_X2 -> "Button_X2"
-    | Button_X3 -> "Button_X3"
-    | Button_X4 -> "Button_X4"
-    | Button_X5 -> "Button_X5"
+    | Left -> "Button_Left"
+    | Middle -> "Button_Middle"
+    | Right -> "Button_Right"
+    | X1 -> "Button_X1"
+    | X2 -> "Button_X2"
+    | X3 -> "Button_X3"
+    | X4 -> "Button_X4"
+    | X5 -> "Button_X5"
   ;;
 
   let of_string s =
     match String.lowercase_ascii s with
-    | "button_left" -> Button_Left
-    | "button_middle" -> Button_Middle
-    | "button_right" -> Button_Right
-    | "button_x1" -> Button_X1
-    | "button_x2" -> Button_X2
-    | "button_x3" -> Button_X3
-    | "button_x4" -> Button_X4
-    | "button_x5" -> Button_X5
+    | "Button_Left" -> Left
+    | "Button_Middle" -> Middle
+    | "Button_Right" -> Right
+    | "Button_X1" -> X1
+    | "Button_X2" -> X2
+    | "Button_X3" -> X3
+    | "Button_X4" -> X4
+    | "Button_X5" -> X5
     | _ -> invalid_arg "Sdlmouse.of_string"
   ;;
 end

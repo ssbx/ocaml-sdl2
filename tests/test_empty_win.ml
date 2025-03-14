@@ -1,7 +1,7 @@
 open CamlSDL2
 
 let () =
-  Sdl.init [ `SDL_INIT_VIDEO ];
+  Sdl.init [ `VIDEO ];
   let width, height = 320, 240 in
   let _ =
     Sdl.create_window
