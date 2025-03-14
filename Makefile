@@ -1,4 +1,7 @@
-.PHONY: build clean test fmt doc dev_update
+.PHONY: build clean test fmt doc dev_update rel
+
+rel: clean 
+	dune-release check
 
 build:
 	dune build

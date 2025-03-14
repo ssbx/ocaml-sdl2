@@ -12,7 +12,7 @@
 
 (maintainers "Seb")
 
-(license "BSD Zero Clause License")
+(license "GPL-3.0-or-later")
 
 (documentation https://github.com/ssbx/caml-sdl2)
 
@@ -24,7 +24,7 @@
   (name caml-sdl2)
   (synopsis "Bindings to the SDL2 library")
   (description "Bindings to the SDL2 library")
-  (depends ocaml dune conf-sdl2)
+  (depends conf-sdl2)
   (tags
     (topics autio bindings graphics media opengl input)))
 

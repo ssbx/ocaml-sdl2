@@ -5,13 +5,12 @@ synopsis: "Bindings to the SDL2 library"
 description: "Bindings to the SDL2 library"
 maintainer: ["Seb"]
 authors: ["Seb"]
-license: "BSD Zero Clause License"
+license: "GPL-3.0-or-later"
 tags: ["topics" "autio" "bindings" "graphics" "media" "opengl" "input"]
 homepage: "https://github.com/ssbx/caml-sdl2"
 doc: "https://github.com/ssbx/caml-sdl2"
 bug-reports: "https://github.com/ssbx/caml-sdl2/issues"
 depends: [
-  "ocaml"
   "dune" {>= "3.15"}
   "conf-sdl2"
   "odoc" {with-doc}
