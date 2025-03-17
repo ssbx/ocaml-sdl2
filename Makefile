@@ -1,4 +1,4 @@
-.PHONY: build clean test fmt doc dev_update release
+.PHONY: build clean test fmt doc install
 
 build:
 	dune build
@@ -16,13 +16,5 @@ fmt:
 doc:
 	dune build @doc && $(BROWSER) _build/default/_doc/_html/caml-sdl2/CamlSDL2/Sdl/index.html
 
-dev_update: clean
+install: clean
 	opam install -v --working-dir ./caml-sdl2.opam
-
-release: clean 
-	dune-release tag
-	dune-release lint
-	dune-release check
-	dune-release distrib
-	dune-release opam pkg
-
