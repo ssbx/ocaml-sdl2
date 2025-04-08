@@ -2039,8 +2039,7 @@ end
 
 external get_runtime_version : unit -> Version.t = "caml_SDL_GetRunTimeVersion"
 external get_compiled_version : unit -> Version.t = "caml_SDL_GetCompiledVersion"
-external get_revision_string : unit -> string = "caml_SDL_GetRevisionString"
-external get_revision_number : unit -> int = "caml_SDL_GetRevisionNumber"
+external get_revision : unit -> string = "caml_SDL_GetRevision"
 external get_ticks : unit -> int = "caml_SDL_GetTicks" [@@noalloc]
 external delay : ms:int -> unit = "caml_SDL_Delay"
 

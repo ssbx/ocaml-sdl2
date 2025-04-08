@@ -49,15 +49,9 @@ caml_SDL_GetRunTimeVersion(value unit)
 }
 
 CAMLprim value
-caml_SDL_GetRevisionString(value unit)
+caml_SDL_GetRevision(value unit)
 {
     const char *rev = SDL_GetRevision();
     return caml_copy_string(rev);
 }
 
-CAMLprim value
-caml_SDL_GetRevisionNumber(value unit)
-{
-    int rev = SDL_GetRevisionNumber();
-    return Val_int(rev);
-}
