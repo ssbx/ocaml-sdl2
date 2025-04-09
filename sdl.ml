@@ -1,4 +1,3 @@
-
 type uint8 = int
 type uint16 = int
 type uint32 = int32
@@ -161,8 +160,10 @@ module Color = struct
     ; b : uint8
     ; a : uint8
     }
-  let make ~r ~g ~b ~a = {r; g; b; a}
+
+  let make ~r ~g ~b ~a = { r; g; b; a }
 end
+
 module PixelFormat = struct
   type t =
     | Unknown
@@ -2260,10 +2261,8 @@ module WindowEventID = struct
     | TAKE_FOCUS -> "SDL_WINDOWEVENT_TAKE_FOCUS"
     | HIT_TEST -> "SDL_WINDOWEVENT_HIT_TEST"
     | MOVED p -> Printf.sprintf "SDL_WINDOWEVENT_MOVED(%d, %d)" p.x p.y
-    | RESIZED p ->
-      Printf.sprintf "SDL_WINDOWEVENT_RESIZED(%d, %d)" p.x p.y
-    | SIZE_CHANGED p ->
-      Printf.sprintf "SDL_WINDOWEVENT_SIZE_CHANGED(%d, %d)" p.x p.y
+    | RESIZED p -> Printf.sprintf "SDL_WINDOWEVENT_RESIZED(%d, %d)" p.x p.y
+    | SIZE_CHANGED p -> Printf.sprintf "SDL_WINDOWEVENT_SIZE_CHANGED(%d, %d)" p.x p.y
   ;;
 end
 
@@ -2597,9 +2596,11 @@ external create_texture
   = "caml_SDL_CreateTexture"
 
 external destroy_texture : Texture.t -> unit = "caml_SDL_DestroyTexture"
+
 external query_texture
   :  Texture.t
-  -> (PixelFormat.t * TextureAccess.t * int * int) = "caml_SDL_QueryTexture"
+  -> PixelFormat.t * TextureAccess.t * int * int
+  = "caml_SDL_QueryTexture"
 
 external set_render_target
   :  Renderer.t

@@ -18,7 +18,7 @@
 
 (use_standard_c_and_cxx_flags true)
 
-(formatting (enabled_for ocaml))
+;; (formatting (enabled_for ocaml))
 
 (package
   (name caml-sdl2)

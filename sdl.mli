@@ -5,7 +5,6 @@ type uint16 = int
 type uint32 = int32
 type uint64 = int64
 
-
 (** {1:base Basics} *)
 
 (** {2:init Initialization and Shutdown} *)
@@ -196,14 +195,14 @@ external point_in_rect : p:Point.t -> r:Rect.t -> bool = "caml_SDL_PointInRect"
 
 (** {2:pixel Pixel Formats and Conversion Routines} *)
 
-
 module Color : sig
-  type t = {
-    r : uint8;
-    g : uint8;
-    b : uint8;
-    a : uint8;
-  }
+  type t =
+    { r : uint8
+    ; g : uint8
+    ; b : uint8
+    ; a : uint8
+    }
+
   val make : r:uint8 -> g:uint8 -> b:uint8 -> a:uint8 -> t
 end
 
@@ -745,7 +744,8 @@ external destroy_texture : Texture.t -> unit = "caml_SDL_DestroyTexture"
 
 external query_texture
   :  Texture.t
-  -> (PixelFormat.t * TextureAccess.t * int * int) = "caml_SDL_QueryTexture"
+  -> PixelFormat.t * TextureAccess.t * int * int
+  = "caml_SDL_QueryTexture"
 
 external set_render_target
   :  Renderer.t
