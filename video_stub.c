@@ -393,6 +393,7 @@ caml_glewInit(value v)
     CAMLreturn(Val_unit);
 }
 
+CAMLprim value
 caml_glClear(value v)
 {
     CAMLparam1(v);
