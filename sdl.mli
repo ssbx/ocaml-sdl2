@@ -513,8 +513,10 @@ external gl_set_swap_interval : interval:int -> unit = "caml_SDL_GL_SetSwapInter
 external gl_get_swap_interval : unit -> int = "caml_SDL_GL_GetSwapInterval"
 external gl_swap_window : Window.t -> unit = "caml_SDL_GL_SwapWindow"
 external gl_delete_context : GLcontext.t -> unit = "caml_SDL_GL_DeleteContext"
-external set_attribute : GLattr.t -> int -> unit = "caml_SDL_GL_SetAttribute"
-external get_attribute : GLattr.t -> int = "caml_SDL_GL_GetAttribute"
+external gl_set_attribute : GLattr.t -> int -> unit = "caml_SDL_GL_SetAttribute"
+external gl_get_attribute : GLattr.t -> int = "caml_SDL_GL_GetAttribute"
+external glew_init : unit -> unit = "caml_glewInit"
+external glClear : unit -> unit = "caml_glClear"
 
 external create_window
   :  title:string

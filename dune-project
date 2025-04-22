@@ -24,7 +24,7 @@
   (name caml-sdl2)
   (synopsis "Bindings to the SDL2 library")
   (description "Bindings to the SDL2 library")
-  (depends conf-sdl2)
+  (depends conf-sdl2 conf-glew)
   (tags
     (topics autio bindings graphics media opengl input)))
 

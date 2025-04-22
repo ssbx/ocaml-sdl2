@@ -14,6 +14,7 @@
 #include <caml/alloc.h>
 #include <caml/fail.h>
 
+#include <GL/glew.h>
 #include <SDL_video.h>
 #include "camlsdl2/video_stub.h"
 #include "camlsdl2/surface_stub.h"
@@ -289,11 +290,6 @@ void SDL_EnableScreenSaver(void);
 void SDL_DisableScreenSaver(void);
 */
 
-/* TODO
-int SDL_GL_LoadLibrary(const char *path);
-void * SDL_GL_GetProcAddress(const char *proc);
-*/
-
 CAMLprim value
 caml_SDL_GL_UnloadLibrary(value unit)
 {
@@ -384,5 +380,24 @@ caml_SDL_GL_DeleteContext(value context)
     CAMLparam1(context);
     SDL_GL_DeleteContext(SDL_GLContext_val(context));
     CAMLreturn(Val_unit);
+}
+
+/* glew gl */
+CAMLprim value
+caml_glewInit(value v)
+{
+    CAMLparam1(v);
+    glewExperimental = GL_TRUE;
+    GLenum ret =  glewInit();
+    if (ret != GLEW_OK) caml_failwith("glewinit fails");
+    CAMLreturn(Val_unit);
+}
+
+caml_glClear(value v)
+{
+    CAMLparam1(v);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    CAMLreturn(Val_unit);
+
 }
 /* vim: set ts=4 sw=4 et: */
